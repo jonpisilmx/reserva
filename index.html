@@ -623,7 +623,7 @@
             document.getElementById('cartModal').style.display = 'none';
         }
 
-        // PROCESO DE CHECKOUT Y GENERACIÓN DE EXCEL
+       // PROCESO DE CHECKOUT Y GENERACIÓN DE EXCEL
         function handleCheckout(e) {
             e.preventDefault();
 
@@ -690,10 +690,7 @@
 
             const mailtoUrl = `mailto:${CONFIG.STORE_EMAIL}?subject=${encodeURIComponent("Nueva Orden de Compra: " + name)}&body=${encodeURIComponent(emailBody)}`;
 
-            alert("¡Orden procesada con éxito!
-
-1. Se ha descargado automáticamente la hoja de Excel con el resumen de tu compra.
-2. Se abrirá tu aplicación de correo para enviar la información al vendedor (no olvides adjuntar el archivo Excel generado).");
+            alert("¡Orden procesada con éxito!\n\n1. Se ha descargado automáticamente la hoja de Excel con el resumen de tu compra.\n2. Se abrirá tu aplicación de correo para enviar la información al vendedor.");
 
             window.location.href = mailtoUrl;
 

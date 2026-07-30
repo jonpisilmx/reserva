@@ -623,83 +623,80 @@
             document.getElementById('cartModal').style.display = 'none';
         }
 
-       // PROCESO DE CHECKOUT Y GENERACIÓN DE EXCEL
-        function handleCheckout(e) {
-            e.preventDefault();
+// PROCESO DE CHECKOUT Y ENVÍO A WHATSAPP
+function handleCheckout(e) {
+    e.preventDefault();
 
-            if (cart.length === 0) {
-                alert('El carrito está vacío. Por favor agrega productos antes de continuar.');
-                return;
-            }
+    if (cart.length === 0) {
+        alert('El carrito está vacío. Por favor agrega productos antes de continuar.');
+        return;
+    }
 
-            const name = document.getElementById('cust-name').value;
-            const email = document.getElementById('cust-email').value;
-            const phone = document.getElementById('cust-phone').value;
-            const notes = document.getElementById('cust-notes').value;
+    const name = document.getElementById('cust-name').value;
+    const email = document.getElementById('cust-email').value;
+    const phone = document.getElementById('cust-phone').value;
+    const notes = document.getElementById('cust-notes').value;
 
-            // 1. GENERAR ARCHIVO EXCEL (.XLSX)
-            const excelData = [];
-            
-            // Encabezado del Pedido
-            excelData.push(["RESUMEN DE ORDEN DE COMPRA"]);
-            excelData.push(["Fecha:", new Date().toLocaleString('es-MX')]);
-            excelData.push(["Cliente:", name]);
-            excelData.push(["Correo:", email]);
-            excelData.push(["Teléfono:", phone]);
-            excelData.push(["Notas/Dirección:", notes]);
-            excelData.push([]); // Línea en blanco
+    // 1. GENERAR Y DESCARGAR ARCHIVO EXCEL (.XLSX)
+    const excelData = [];
+    excelData.push(["RESUMEN DE ORDEN DE COMPRA"]);
+    excelData.push(["Fecha:", new Date().toLocaleString('es-MX')]);
+    excelData.push(["Cliente:", name]);
+    excelData.push(["Correo:", email]);
+    excelData.push(["Teléfono:", phone]);
+    excelData.push(["Notas/Dirección:", notes]);
+    excelData.push([]); 
 
-            // Detalle de Productos
-            excelData.push(["ID Producto", "Nombre del Producto", "Precio Unitario (USD)", "Cantidad", "Subtotal (USD)"]);
-            
-            let granTotal = 0;
-            cart.forEach(item => {
-                const sub = item.price * item.quantity;
-                granTotal += sub;
-                excelData.push([item.id, item.name, item.price, item.quantity, sub]);
-            });
+    excelData.push(["ID Producto", "Nombre del Producto", "Precio Unitario", "Cantidad", "Subtotal"]);
+    
+    let granTotal = 0;
+    cart.forEach(item => {
+        const sub = item.price * item.quantity;
+        granTotal += sub;
+        excelData.push([item.id, item.name, item.price, item.quantity, sub]);
+    });
 
-            excelData.push([]);
-            excelData.push(["", "", "", "TOTAL A PAGAR:", granTotal]);
+    excelData.push([]);
+    excelData.push(["", "", "", "TOTAL A PAGAR:", granTotal]);
 
-            // Crear Hoja de Cálculo con SheetJS
-            const ws = XLSX.utils.aoa_to_sheet(excelData);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Orden_de_Compra");
+    const ws = XLSX.utils.aoa_to_sheet(excelData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Orden_de_Compra");
 
-            // Nombre del archivo
-            const fileName = `Orden_Compra_${name.replace(/\s+/g, '_')}_${Date.now()}.xlsx`;
+    const fileName = `Orden_${name.replace(/\s+/g, '_')}.xlsx`;
+    XLSX.writeFile(wb, fileName);
 
-            // Descargar el archivo Excel automáticamente
-            XLSX.writeFile(wb, fileName);
+    // 2. CREAR MENSAJE PARA WHATSAPP
+    let waMessage = `*¡NUEVA ORDEN DE COMPRA!* 🛒\n\n`;
+    waMessage += `*Cliente:* ${name}\n`;
+    waMessage += `*Teléfono:* ${phone}\n`;
+    waMessage += `*Correo:* ${email}\n`;
+    if (notes) waMessage += `*Notas:* ${notes}\n`;
+    waMessage += `\n*Detalle del Pedido:*\n`;
 
-            // 2. ABRIR CLIENTE DE CORREO (mailto) CON EL DETALLE COMPLETO
-            let emailBody = `Hola, adjunto la orden de compra en formato Excel para procesar mi pedido.\n\n`;
-            emailBody += `--- DATOS DEL CLIENTE ---\n`;
-            emailBody += `Nombre: ${name}\n`;
-            emailBody += `Correo: ${email}\n`;
-            emailBody += `Teléfono: ${phone}\n`;
-            emailBody += `Notas / Dirección: ${notes}\n\n`;
-            emailBody += `--- DETALLE DEL PEDIDO ---\n`;
-            
-            cart.forEach(item => {
-                emailBody += `- ${item.name} x${item.quantity} : $${(item.price * item.quantity).toFixed(2)} USD\n`;
-            });
-            emailBody += `\nTOTAL: $${granTotal.toFixed(2)} USD\n\n`;
-            emailBody += `(El archivo Excel de esta orden se ha descargado en mi dispositivo para adjuntarlo en este mensaje).`;
+    cart.forEach(item => {
+        waMessage += `• ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
+    });
 
-            const mailtoUrl = `mailto:${CONFIG.STORE_EMAIL}?subject=${encodeURIComponent("Nueva Orden de Compra: " + name)}&body=${encodeURIComponent(emailBody)}`;
+    waMessage += `\n*TOTAL: $${granTotal.toFixed(2)} USD*\n\n`;
+    waMessage += `_(Se ha generado el comprobante en Excel en mi dispositivo para enviarlo)_`;
 
-            alert("¡Orden procesada con éxito!\n\n1. Se ha descargado automáticamente la hoja de Excel con el resumen de tu compra.\n2. Se abrirá tu aplicación de correo para enviar la información al vendedor.");
+    // REEMPLAZA ESTE NÚMERO CON TU NÚMERO COMERCIAL (incluye código de país, ej: 521...)
+    const myPhoneNumber = "+529581098287"; 
 
-            window.location.href = mailtoUrl;
+    const waUrl = `https://api.whatsapp.com/send?phone=${myPhoneNumber}&text=${encodeURIComponent(waMessage)}`;
 
-            // Resetear carrito
-            cart = [];
-            updateCartUI();
-            closeCart();
-            document.getElementById('checkoutForm').reset();
-        }
+    alert("¡Pedido generado!\n\n1. Se ha descargado la hoja de Excel en tu dispositivo.\n2. Te redirigiremos a WhatsApp para confirmar tu pedido.");
+
+    // Abrir WhatsApp en pestaña nueva
+    window.open(waUrl, '_blank');
+
+    // Resetear carrito
+    cart = [];
+    updateCartUI();
+    closeCart();
+    document.getElementById('checkoutForm').reset();
+}
     </script>
 </body>
 </html>

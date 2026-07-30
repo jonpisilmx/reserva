@@ -145,7 +145,7 @@
             letter-spacing: 1px;
         }
 
-        /* SECCIÓN DE SELECCIÓN DE FECHA (PASO 1) */
+        /* SECCIÓN DE RANGO DE FECHAS (PASO 1) */
         .date-selector-card {
             background: #FFFFFF;
             border: 2px solid var(--accent-green);
@@ -169,21 +169,40 @@
         .date-selector-card p {
             font-size: 14px;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
-        .date-input-wrapper {
-            display: inline-block;
-            width: 100%;
-            max-width: 300px;
+        .date-range-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .date-input-wrapper input[type="date"] {
+        .date-field {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .date-field label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .date-field input[type="date"] {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 12px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 14px;
             font-family: inherit;
             color: var(--text-main);
             background-color: var(--bg-primary);
@@ -191,7 +210,7 @@
             transition: border-color 0.2s;
         }
 
-        .date-input-wrapper input[type="date"]:focus {
+        .date-field input[type="date"]:focus {
             border-color: var(--accent-green);
         }
 
@@ -483,12 +502,20 @@
     <!-- MAIN CATALOG CONTAINER -->
     <main class="container" id="catalogo">
         
-        <!-- PASO 1: SELECCIÓN DE FECHA DE ENTREGA -->
+        <!-- PASO 1: SELECCIÓN DE RANGO DE FECHAS -->
         <div class="date-selector-card">
-            <h3>📅 Paso 1: Selecciona la fecha en la que deseas recibir tu pedido</h3>
-            <p>Elige el día de entrega para verificar la disponibilidad de nuestro catálogo.</p>
-            <div class="date-input-wrapper">
-                <input type="date" id="main-delivery-date" required>
+            <h3>📅 Paso 1: Selecciona el rango de fechas para recibir tu pedido</h3>
+            <p>Elige una ventana de entrega para verificar la disponibilidad de nuestro catálogo.</p>
+            
+            <div class="date-range-wrapper">
+                <div class="date-field">
+                    <label for="start-date">Desde (Fecha de inicio) *</label>
+                    <input type="date" id="start-date" onchange="handleStartDateChange()">
+                </div>
+                <div class="date-field">
+                    <label for="end-date">Hasta (Fecha de término) *</label>
+                    <input type="date" id="end-date">
+                </div>
             </div>
         </div>
 
@@ -572,9 +599,9 @@
                 <div class="close-modal" onclick="closeCart()">&times;</div>
             </div>
 
-            <!-- RESUMEN DE LA FECHA SELECCIONADA -->
+            <!-- RESUMEN DEL RANGO SELECCIONADO -->
             <div class="delivery-summary-badge" id="modal-date-display">
-                📅 Fecha de Entrega: <span id="summary-date-text">No seleccionada</span>
+                📅 Rango de Entrega: <span id="summary-date-text">No seleccionado</span>
             </div>
 
             <div class="cart-table-wrapper">
@@ -637,21 +664,45 @@
 
         let cart = [];
 
-        // Bloquear fechas pasadas en el calendario principal al cargar la página
+        // Bloquear fechas pasadas al cargar la página
         document.addEventListener("DOMContentLoaded", function() {
-            const dateInput = document.getElementById('main-delivery-date');
+            const startDate = document.getElementById('start-date');
+            const endDate = document.getElementById('end-date');
             const today = new Date().toISOString().split('T')[0];
-            dateInput.setAttribute('min', today);
+
+            startDate.setAttribute('min', today);
+            endDate.setAttribute('min', today);
         });
 
-        // Agregar al carrito (validando primero la fecha)
-        function addToCart(id, name, price) {
-            const dateInput = document.getElementById('main-delivery-date');
+        // Al cambiar la fecha de inicio, la fecha de término no puede ser anterior a esta
+        function handleStartDateChange() {
+            const startDateVal = document.getElementById('start-date').value;
+            const endDateInput = document.getElementById('end-date');
 
-            if (!dateInput.value) {
-                alert("📅 Por favor, selecciona primero la fecha de entrega en el Paso 1 antes de agregar productos.");
-                dateInput.focus();
-                dateInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (startDateVal) {
+                endDateInput.setAttribute('min', startDateVal);
+                if (endDateInput.value && endDateInput.value < startDateVal) {
+                    endDateInput.value = startDateVal;
+                }
+            }
+        }
+
+        // Agregar al carrito (validando el rango completo)
+        function addToCart(id, name, price) {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            if (!startDate || !endDate) {
+                alert("📅 Por favor, selecciona la fecha de inicio y término para la entrega en el Paso 1 antes de agregar productos.");
+                
+                const focusInput = !startDate ? document.getElementById('start-date') : document.getElementById('end-date');
+                focusInput.focus();
+                document.querySelector('.date-selector-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            if (endDate < startDate) {
+                alert("⚠️ La fecha de término no puede ser anterior a la fecha de inicio.");
                 return;
             }
 
@@ -687,10 +738,12 @@
             const countSpan = document.getElementById('cart-count');
             const totalSpan = document.getElementById('cart-total');
             const dateText = document.getElementById('summary-date-text');
-            const selectedDate = document.getElementById('main-delivery-date').value;
 
-            if (selectedDate) {
-                dateText.innerText = selectedDate;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            if (startDate && endDate) {
+                dateText.innerText = `Del ${startDate} al ${endDate}`;
             }
 
             body.innerHTML = '';
@@ -739,7 +792,8 @@
                 return;
             }
 
-            const deliveryDate = document.getElementById('main-delivery-date').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
             const name = document.getElementById('cust-name').value;
             const email = document.getElementById('cust-email').value;
             const phone = document.getElementById('cust-phone').value;
@@ -748,7 +802,7 @@
             // CONSTRUIR MENSAJE Y ABRIR WHATSAPP API
             let granTotal = 0;
             let waMessage = `*¡NUEVA ORDEN DE COMPRA!* 🛒\n\n`;
-            waMessage += `📅 *Fecha Solicitada de Entrega:* ${deliveryDate}\n`;
+            waMessage += `📅 *Rango de Entrega:* Del ${startDate} al ${endDate}\n`;
             waMessage += `👤 *Cliente:* ${name}\n`;
             waMessage += `📞 *Teléfono:* ${phone}\n`;
             waMessage += `✉️ *Correo:* ${email}\n`;

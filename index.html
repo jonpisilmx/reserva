@@ -83,6 +83,7 @@
             border-radius: 20px;
             cursor: pointer;
             white-space: nowrap;
+            transition: transform 0.2s, background-color 0.2s;
         }
 
         .cart-trigger:hover {
@@ -487,7 +488,7 @@
             <div class="logo">VERDE & ARMONÍA</div>
             <div class="nav-links">
                 <a href="#catalogo">Colección</a>
-                <a href="javascript:void(0)" class="cart-trigger" onclick="openCart()">🛒 Carrito (<span id="cart-count">0</span>)</a>
+                <a href="javascript:void(0)" class="cart-trigger" id="cart-button" onclick="openCart()">🛒 Carrito (<span id="cart-count">0</span>)</a>
             </div>
         </div>
     </header>
@@ -687,7 +688,7 @@
             }
         }
 
-        // Agregar al carrito (validando el rango completo)
+        // Agregar al carrito (sin abrir el modal de inmediato)
         function addToCart(id, name, price) {
             const startDate = document.getElementById('start-date').value;
             const endDate = document.getElementById('end-date').value;
@@ -712,8 +713,16 @@
             } else {
                 cart.push({ id: id, name: name, price: price, quantity: 1 });
             }
+            
+            // Actualiza los números del contador
             updateCartUI();
-            openCart();
+
+            // Pequeña animación visual en el botón del carrito para confirmar la acción
+            const cartBtn = document.getElementById('cart-button');
+            cartBtn.style.transform = 'scale(1.15)';
+            setTimeout(() => {
+                cartBtn.style.transform = 'scale(1)';
+            }, 200);
         }
 
         // Modificar cantidad
@@ -774,7 +783,7 @@
             totalSpan.innerText = total.toFixed(2);
         }
 
-        // Abrir/Cerrar Modal
+        // Abrir/Cerrar Modal (se dispara solo al presionar el botón "Carrito")
         function openCart() {
             document.getElementById('cartModal').style.display = 'block';
         }

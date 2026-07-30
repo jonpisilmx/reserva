@@ -275,16 +275,69 @@
             margin-bottom: 12px;
         }
 
+        /* SELECTOR DE CANTIDAD EN LA TARJETA */
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .card-qty-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background-color: var(--bg-primary);
+            overflow: hidden;
+            height: 40px;
+        }
+
+        .card-qty-btn {
+            background: none;
+            border: none;
+            width: 32px;
+            height: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .card-qty-btn:hover {
+            background-color: var(--accent-light);
+        }
+
+        .card-qty-input {
+            width: 36px;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        /* Ocultar flechas nativas del input number */
+        .card-qty-input::-webkit-outer-spin-button,
+        .card-qty-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
         .add-to-cart-btn {
             background-color: var(--accent-green);
             color: white;
             border: none;
-            padding: 10px 15px;
+            height: 40px;
+            padding: 0 15px;
             border-radius: 20px;
             cursor: pointer;
-            width: 100%;
+            flex-grow: 1;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             transition: background 0.2s;
         }
 
@@ -531,7 +584,14 @@
                     <div class="product-title">Monstera Deliciosa</div>
                     <div class="product-desc">Planta tropical de hojas anchas y caladas. Ideal para interiores luminosos.</div>
                     <div class="product-price">$45.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart(1, 'Monstera Deliciosa', 45.00)">Agregar al Carrito</button>
+                    <div class="card-actions">
+                        <div class="card-qty-wrapper">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-1', -1)">-</button>
+                            <input type="number" id="qty-1" class="card-qty-input" value="1" min="1">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-1', 1)">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(1, 'Monstera Deliciosa', 45.00, 'qty-1')">Agregar</button>
+                    </div>
                 </div>
             </div>
 
@@ -542,7 +602,14 @@
                     <div class="product-title">Ficus Lyrata</div>
                     <div class="product-desc">Árbol de lira escultórico, perfecto como punto focal en salas y oficinas.</div>
                     <div class="product-price">$62.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart(2, 'Ficus Lyrata', 62.00)">Agregar al Carrito</button>
+                    <div class="card-actions">
+                        <div class="card-qty-wrapper">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-2', -1)">-</button>
+                            <input type="number" id="qty-2" class="card-qty-input" value="1" min="1">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-2', 1)">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(2, 'Ficus Lyrata', 62.00, 'qty-2')">Agregar</button>
+                    </div>
                 </div>
             </div>
 
@@ -553,7 +620,14 @@
                     <div class="product-title">Calathea Orbifolia</div>
                     <div class="product-desc">Hojas redondas con un patrón de rayas verdes finas e impresionantes.</div>
                     <div class="product-price">$38.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart(3, 'Calathea Orbifolia', 38.00)">Agregar al Carrito</button>
+                    <div class="card-actions">
+                        <div class="card-qty-wrapper">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-3', -1)">-</button>
+                            <input type="number" id="qty-3" class="card-qty-input" value="1" min="1">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-3', 1)">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(3, 'Calathea Orbifolia', 38.00, 'qty-3')">Agregar</button>
+                    </div>
                 </div>
             </div>
 
@@ -564,7 +638,14 @@
                     <div class="product-title">Maceta Cerámica Beige</div>
                     <div class="product-desc">Hecha a mano con textura mate y plato integrado para drenaje.</div>
                     <div class="product-price">$25.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart(4, 'Maceta Cerámica Beige', 25.00)">Agregar al Carrito</button>
+                    <div class="card-actions">
+                        <div class="card-qty-wrapper">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-4', -1)">-</button>
+                            <input type="number" id="qty-4" class="card-qty-input" value="1" min="1">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-4', 1)">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(4, 'Maceta Cerámica Beige', 25.00, 'qty-4')">Agregar</button>
+                    </div>
                 </div>
             </div>
 
@@ -575,7 +656,14 @@
                     <div class="product-title">Sansevieria Trifasciata</div>
                     <div class="product-desc">Extremadamente resistente y purificadora del aire. Muy bajo mantenimiento.</div>
                     <div class="product-price">$29.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart(5, 'Sansevieria Trifasciata', 29.00)">Agregar al Carrito</button>
+                    <div class="card-actions">
+                        <div class="card-qty-wrapper">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-5', -1)">-</button>
+                            <input type="number" id="qty-5" class="card-qty-input" value="1" min="1">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-5', 1)">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(5, 'Sansevieria Trifasciata', 29.00, 'qty-5')">Agregar</button>
+                    </div>
                 </div>
             </div>
 
@@ -586,7 +674,14 @@
                     <div class="product-title">Pothos Dorado</div>
                     <div class="product-desc">Planta colgante de rápido crecimiento y hermosas hojas acorazonadas.</div>
                     <div class="product-price">$20.00</div>
-                    <button class="add-to-cart-btn" onclick="addToCart(6, 'Pothos Dorado', 20.00)">Agregar al Carrito</button>
+                    <div class="card-actions">
+                        <div class="card-qty-wrapper">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-6', -1)">-</button>
+                            <input type="number" id="qty-6" class="card-qty-input" value="1" min="1">
+                            <button class="card-qty-btn" onclick="adjustCardQty('qty-6', 1)">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(6, 'Pothos Dorado', 20.00, 'qty-6')">Agregar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -675,7 +770,7 @@
             endDate.setAttribute('min', today);
         });
 
-        // Al cambiar la fecha de inicio, la fecha de término no puede ser anterior a esta
+        // Al cambiar la fecha de inicio, la fecha de término no puede ser anterior
         function handleStartDateChange() {
             const startDateVal = document.getElementById('start-date').value;
             const endDateInput = document.getElementById('end-date');
@@ -688,14 +783,22 @@
             }
         }
 
-        // Agregar al carrito (sin abrir el modal de inmediato)
-        function addToCart(id, name, price) {
+        // Función para ajustar los botones + y - en las tarjetas de producto
+        function adjustCardQty(inputId, delta) {
+            const input = document.getElementById(inputId);
+            let val = parseInt(input.value) || 1;
+            val += delta;
+            if (val < 1) val = 1;
+            input.value = val;
+        }
+
+        // Agregar al carrito leyendo la cantidad seleccionada en la tarjeta
+        function addToCart(id, name, price, qtyInputId) {
             const startDate = document.getElementById('start-date').value;
             const endDate = document.getElementById('end-date').value;
 
             if (!startDate || !endDate) {
                 alert("📅 Por favor, selecciona la fecha de inicio y término para la entrega en el Paso 1 antes de agregar productos.");
-                
                 const focusInput = !startDate ? document.getElementById('start-date') : document.getElementById('end-date');
                 focusInput.focus();
                 document.querySelector('.date-selector-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -707,17 +810,23 @@
                 return;
             }
 
+            // Obtener la cantidad del input de la tarjeta
+            const qtyInput = document.getElementById(qtyInputId);
+            const quantityToAdd = parseInt(qtyInput.value) || 1;
+
             const existingItem = cart.find(item => item.id === id);
             if (existingItem) {
-                existingItem.quantity += 1;
+                existingItem.quantity += quantityToAdd;
             } else {
-                cart.push({ id: id, name: name, price: price, quantity: 1 });
+                cart.push({ id: id, name: name, price: price, quantity: quantityToAdd });
             }
             
-            // Actualiza los números del contador
+            // Reiniciar el contador de la tarjeta a 1 tras agregar
+            qtyInput.value = 1;
+
             updateCartUI();
 
-            // Pequeña animación visual en el botón del carrito para confirmar la acción
+            // Animación sutil en el botón del carrito
             const cartBtn = document.getElementById('cart-button');
             cartBtn.style.transform = 'scale(1.15)';
             setTimeout(() => {
@@ -725,7 +834,7 @@
             }, 200);
         }
 
-        // Modificar cantidad
+        // Modificar cantidad desde dentro del modal del carrito
         function updateQuantity(id, qty) {
             const item = cart.find(i => i.id === id);
             if (item) {
@@ -783,7 +892,7 @@
             totalSpan.innerText = total.toFixed(2);
         }
 
-        // Abrir/Cerrar Modal (se dispara solo al presionar el botón "Carrito")
+        // Abrir/Cerrar Modal
         function openCart() {
             document.getElementById('cartModal').style.display = 'block';
         }
@@ -808,7 +917,6 @@
             const phone = document.getElementById('cust-phone').value;
             const notes = document.getElementById('cust-notes').value;
 
-            // CONSTRUIR MENSAJE Y ABRIR WHATSAPP API
             let granTotal = 0;
             let waMessage = `*¡NUEVA ORDEN DE COMPRA!* 🛒\n\n`;
             waMessage += `📅 *Rango de Entrega:* Del ${startDate} al ${endDate}\n`;
@@ -830,7 +938,6 @@
 
             window.open(waUrl, '_blank');
 
-            // Resetear carrito
             cart = [];
             updateCartUI();
             closeCart();

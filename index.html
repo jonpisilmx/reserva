@@ -30,7 +30,7 @@
             line-height: 1.6;
         }
 
-        /* HEADER & NAV */
+        /* HEADER & NAV RESPONSIVO */
         header {
             background-color: #FFFFFF;
             border-bottom: 1px solid var(--border-color);
@@ -42,15 +42,16 @@
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px 30px;
-            display: table;
-            width: 100%;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .logo {
-            display: table-cell;
-            vertical-align: middle;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: 1.5px;
             color: var(--accent-green);
@@ -58,17 +59,16 @@
         }
 
         .nav-links {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-main);
-            margin-left: 25px;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 14px;
             transition: color 0.2s;
         }
 
@@ -79,34 +79,35 @@
         .cart-trigger {
             background-color: var(--accent-green);
             color: white !important;
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .cart-trigger:hover {
             background-color: var(--accent-hover);
         }
 
-        /* HERO SECTION */
+        /* HERO SECTION RESPONSIVO */
         .hero {
             background: linear-gradient(rgba(44, 62, 53, 0.4), rgba(44, 62, 53, 0.4)), url('https://images.unsplash.com/photo-1470058869958-2a77ade41c02?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
             color: white;
-            padding: 100px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 32px;
             font-weight: 300;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             margin-bottom: 15px;
         }
 
         .hero p {
-            font-size: 18px;
+            font-size: 16px;
             max-width: 600px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 25px auto;
             font-weight: 300;
         }
 
@@ -114,7 +115,7 @@
             display: inline-block;
             background-color: #FFFFFF;
             color: var(--accent-green);
-            padding: 12px 30px;
+            padding: 12px 28px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
@@ -130,59 +131,57 @@
         /* MAIN CATALOG CONTAINER */
         .container {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 30px auto;
+            padding: 0 15px;
         }
 
         .section-title {
             text-align: center;
-            font-size: 28px;
+            font-size: 24px;
             color: var(--accent-green);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* PRODUCT GRID (USANDO TABLE LAYOUT PARA COMPATIBILIDAD PERFECTA) */
+        /* PRODUCT GRID CON CSS GRID RESPONSIVO */
         .product-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* 1 columna en celulares */
+            gap: 20px;
             width: 100%;
-            display: table;
-            table-layout: fixed;
-            border-spacing: 20px;
-        }
-
-        .product-row {
-            display: table-row;
         }
 
         .product-card {
-            display: table-cell;
             background: var(--bg-card);
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            vertical-align: top;
-            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
         .product-img {
             width: 100%;
-            height: 260px;
+            height: 240px;
             object-fit: cover;
             border-bottom: 1px solid var(--border-color);
         }
 
         .product-info {
-            padding: 20px;
+            padding: 15px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .product-title {
@@ -196,21 +195,21 @@
             font-size: 13px;
             color: var(--text-muted);
             margin-bottom: 12px;
-            min-height: 40px;
+            flex-grow: 1;
         }
 
         .product-price {
             font-size: 18px;
             font-weight: 700;
             color: var(--accent-green);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .add-to-cart-btn {
             background-color: var(--accent-green);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 20px;
             cursor: pointer;
             width: 100%;
@@ -223,7 +222,7 @@
             background-color: var(--accent-hover);
         }
 
-        /* MODAL CARRITO & CHECKOUT */
+        /* MODAL CARRITO & CHECKOUT RESPONSIVO */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -241,63 +240,66 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            width: 90%;
-            max-width: 650px;
+            width: 92%;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             border-radius: 12px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .modal-header {
-            display: table;
-            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .modal-title {
-            display: table-cell;
-            font-size: 22px;
+            font-size: 20px;
             color: var(--accent-green);
             font-weight: 600;
         }
 
         .close-modal {
-            display: table-cell;
-            text-align: right;
             font-size: 24px;
             cursor: pointer;
             color: var(--text-muted);
         }
 
-        /* TABLA CARRITO */
+        .cart-table-wrapper {
+            overflow-x: auto;
+            width: 100%;
+        }
+
         .cart-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            min-width: 320px;
         }
 
         .cart-table th {
             text-align: left;
-            padding: 10px;
+            padding: 8px;
             border-bottom: 2px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .cart-table td {
-            padding: 12px 10px;
+            padding: 10px 8px;
             border-bottom: 1px solid var(--border-color);
             vertical-align: middle;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .qty-input {
-            width: 50px;
-            padding: 5px;
+            width: 45px;
+            padding: 4px;
             text-align: center;
             border: 1px solid var(--border-color);
             border-radius: 4px;
@@ -314,71 +316,85 @@
 
         .cart-summary {
             text-align: right;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--accent-green);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         /* FORMULARIO DE CLIENTE */
         .checkout-form h3 {
-            font-size: 16px;
-            margin-bottom: 15px;
+            font-size: 15px;
+            margin-bottom: 12px;
             color: var(--accent-green);
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 5px;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-main);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 600;
         }
 
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 10px;
+            padding: 8px 10px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             font-size: 14px;
         }
 
         .submit-order-btn {
-            background-color: var(--accent-green);
+            background-color: #25D366; /* Verde WhatsApp */
             color: white;
             border: none;
             width: 100%;
-            padding: 14px;
-            font-size: 16px;
+            padding: 12px;
+            font-size: 15px;
             font-weight: 700;
             border-radius: 6px;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 10px;
             transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .submit-order-btn:hover {
-            background-color: var(--accent-hover);
+            background-color: #1EBE5D;
         }
 
-        /* FOOTER */
         footer {
             background-color: var(--accent-green);
             color: white;
             text-align: center;
-            padding: 30px;
-            margin-top: 60px;
-            font-size: 14px;
+            padding: 25px 15px;
+            margin-top: 40px;
+            font-size: 13px;
         }
 
-        footer p {
-            opacity: 0.8;
+        /* MEDIA QUERIES PARA PANTALLAS MÁS GRANDES */
+        @media (min-width: 600px) {
+            .hero h1 { font-size: 42px; }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+            }
+        }
+
+        @media (min-width: 900px) {
+            .hero h1 { font-size: 48px; }
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columnas en escritorio */
+            }
         }
     </style>
 </head>
@@ -390,7 +406,6 @@
             <div class="logo">VERDE & ARMONÍA</div>
             <div class="nav-links">
                 <a href="#catalogo">Colección</a>
-                <a href="#nosotros">Nosotros</a>
                 <a href="javascript:void(0)" class="cart-trigger" onclick="openCart()">🛒 Carrito (<span id="cart-count">0</span>)</a>
             </div>
         </div>
@@ -403,80 +418,74 @@
         <a href="#catalogo" class="hero-btn">Explorar Catálogo</a>
     </section>
 
-    <!-- CATALOGO DE PRODUCTOS (EDITABLE EN EL HTML) -->
+    <!-- CATALOGO DE PRODUCTOS -->
     <main class="container" id="catalogo">
         <h2 class="section-title">Nuestra Colección</h2>
 
         <div class="product-grid">
-            <!-- FILA 1 -->
-            <div class="product-row">
-                <!-- PRODUCTO 1 -->
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Monstera Deliciosa">
-                    <div class="product-info">
-                        <div class="product-title">Monstera Deliciosa</div>
-                        <div class="product-desc">Planta tropical de hojas anchas y caladas. Ideal para interiores luminosos.</div>
-                        <div class="product-price">$45.00</div>
-                        <button class="add-to-cart-btn" onclick="addToCart(1, 'Monstera Deliciosa', 45.00)">Agregar al Carrito</button>
-                    </div>
-                </div>
-
-                <!-- PRODUCTO 2 -->
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Ficus Lyrata">
-                    <div class="product-info">
-                        <div class="product-title">Ficus Lyrata</div>
-                        <div class="product-desc">Árbol de lira escultórico, perfecto como punto focal en salas y oficinas.</div>
-                        <div class="product-price">$62.00</div>
-                        <button class="add-to-cart-btn" onclick="addToCart(2, 'Ficus Lyrata', 62.00)">Agregar al Carrito</button>
-                    </div>
-                </div>
-
-                <!-- PRODUCTO 3 -->
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Calathea Orbifolia">
-                    <div class="product-info">
-                        <div class="product-title">Calathea Orbifolia</div>
-                        <div class="product-desc">Hojas redondas con un patrón de rayas verdes finas e impresionantes.</div>
-                        <div class="product-price">$38.00</div>
-                        <button class="add-to-cart-btn" onclick="addToCart(3, 'Calathea Orbifolia', 38.00)">Agregar al Carrito</button>
-                    </div>
+            <!-- PRODUCTO 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Monstera Deliciosa">
+                <div class="product-info">
+                    <div class="product-title">Monstera Deliciosa</div>
+                    <div class="product-desc">Planta tropical de hojas anchas y caladas. Ideal para interiores luminosos.</div>
+                    <div class="product-price">$45.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(1, 'Monstera Deliciosa', 45.00)">Agregar al Carrito</button>
                 </div>
             </div>
 
-            <!-- FILA 2 -->
-            <div class="product-row">
-                <!-- PRODUCTO 4 -->
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Maceta Cerámica Beige">
-                    <div class="product-info">
-                        <div class="product-title">Maceta Cerámica Beige</div>
-                        <div class="product-desc">Hecha a mano con textura mate y plato integrado para drenaje.</div>
-                        <div class="product-price">$25.00</div>
-                        <button class="add-to-cart-btn" onclick="addToCart(4, 'Maceta Cerámica Beige', 25.00)">Agregar al Carrito</button>
-                    </div>
+            <!-- PRODUCTO 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Ficus Lyrata">
+                <div class="product-info">
+                    <div class="product-title">Ficus Lyrata</div>
+                    <div class="product-desc">Árbol de lira escultórico, perfecto como punto focal en salas y oficinas.</div>
+                    <div class="product-price">$62.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(2, 'Ficus Lyrata', 62.00)">Agregar al Carrito</button>
                 </div>
+            </div>
 
-                <!-- PRODUCTO 5 -->
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Sansevieria Trifasciata">
-                    <div class="product-info">
-                        <div class="product-title">Sansevieria Trifasciata</div>
-                        <div class="product-desc">Extremadamente resistente y purificadora del aire. Muy bajo mantenimiento.</div>
-                        <div class="product-price">$29.00</div>
-                        <button class="add-to-cart-btn" onclick="addToCart(5, 'Sansevieria Trifasciata', 29.00)">Agregar al Carrito</button>
-                    </div>
+            <!-- PRODUCTO 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Calathea Orbifolia">
+                <div class="product-info">
+                    <div class="product-title">Calathea Orbifolia</div>
+                    <div class="product-desc">Hojas redondas con un patrón de rayas verdes finas e impresionantes.</div>
+                    <div class="product-price">$38.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(3, 'Calathea Orbifolia', 38.00)">Agregar al Carrito</button>
                 </div>
+            </div>
 
-                <!-- PRODUCTO 6 -->
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Pothos Dorado">
-                    <div class="product-info">
-                        <div class="product-title">Pothos Dorado</div>
-                        <div class="product-desc">Planta colgante de rápido crecimiento y hermosas hojas acorazonadas.</div>
-                        <div class="product-price">$20.00</div>
-                        <button class="add-to-cart-btn" onclick="addToCart(6, 'Pothos Dorado', 20.00)">Agregar al Carrito</button>
-                    </div>
+            <!-- PRODUCTO 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Maceta Cerámica Beige">
+                <div class="product-info">
+                    <div class="product-title">Maceta Cerámica Beige</div>
+                    <div class="product-desc">Hecha a mano con textura mate y plato integrado para drenaje.</div>
+                    <div class="product-price">$25.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(4, 'Maceta Cerámica Beige', 25.00)">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- PRODUCTO 5 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Sansevieria Trifasciata">
+                <div class="product-info">
+                    <div class="product-title">Sansevieria Trifasciata</div>
+                    <div class="product-desc">Extremadamente resistente y purificadora del aire. Muy bajo mantenimiento.</div>
+                    <div class="product-price">$29.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(5, 'Sansevieria Trifasciata', 29.00)">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- PRODUCTO 6 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Pothos Dorado">
+                <div class="product-info">
+                    <div class="product-title">Pothos Dorado</div>
+                    <div class="product-desc">Planta colgante de rápido crecimiento y hermosas hojas acorazonadas.</div>
+                    <div class="product-price">$20.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(6, 'Pothos Dorado', 20.00)">Agregar al Carrito</button>
                 </div>
             </div>
         </div>
@@ -490,21 +499,22 @@
                 <div class="close-modal" onclick="closeCart()">&times;</div>
             </div>
 
-            <!-- TABLA DE PRODUCTOS EN EL CARRITO -->
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cant.</th>
-                        <th>Subtotal</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="cart-items-body">
-                    <!-- Filas dinámicas por JS -->
-                </tbody>
-            </table>
+            <div class="cart-table-wrapper">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cant.</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items-body">
+                        <!-- Filas dinámicas por JS -->
+                    </tbody>
+                </table>
+            </div>
 
             <div class="cart-summary">
                 Total: $<span id="cart-total">0.00</span> USD
@@ -512,7 +522,7 @@
 
             <!-- FORMULARIO DE ENVÍO -->
             <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
-                <h3>Datos para la Confirmación de Orden</h3>
+                <h3>Datos para Confirmar por WhatsApp</h3>
                 <div class="form-group">
                     <label>Nombre Completo *</label>
                     <input type="text" id="cust-name" required placeholder="Ej. Ana García">
@@ -523,14 +533,16 @@
                 </div>
                 <div class="form-group">
                     <label>Teléfono / WhatsApp *</label>
-                    <input type="tel" id="cust-phone" required placeholder="+52 951 123 4567">
+                    <input type="tel" id="cust-phone" required placeholder="+52 958 ...">
                 </div>
                 <div class="form-group">
                     <label>Dirección de Envío / Notas Adicionales</label>
                     <textarea id="cust-notes" rows="2" placeholder="Dirección completa y referencias..."></textarea>
                 </div>
 
-                <button type="submit" class="submit-order-btn">🚀 Generar y Enviar Pedido por Correo</button>
+                <button type="submit" class="submit-order-btn">
+                    📲 Generar Excel y Enviar por WhatsApp
+                </button>
             </form>
         </div>
     </div>
@@ -540,14 +552,12 @@
     </footer>
 
     <!-- LÓGICA DE JAVASCRIPT Y PROCESAMIENTO DE EXCEL (XLSX) -->
-    <!-- Carga de SheetJS para generación nativa de hojas de cálculo Excel desde el navegador -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <script>
-        // CONFIGURACIÓN: Reemplaza con tu EmailJS User ID, Service ID y Template ID si usas envío automático sin backend
+        // CONFIGURACIÓN DE WHATSAPP
         const CONFIG = {
-            STORE_EMAIL: "jonpisilmx@gmail.com",
-            ENABLE_AUTOMATIC_EMAILJS: false // Cambiar a true si configuras EmailJS
+            WHATSAPP_NUMBER: "529581098287" // +52 958 109 8287
         };
 
         let cart = [];
@@ -623,80 +633,79 @@
             document.getElementById('cartModal').style.display = 'none';
         }
 
-// PROCESO DE CHECKOUT Y ENVÍO A WHATSAPP
-function handleCheckout(e) {
-    e.preventDefault();
+        // PROCESO DE CHECKOUT Y ENVÍO A WHATSAPP
+        function handleCheckout(e) {
+            e.preventDefault();
 
-    if (cart.length === 0) {
-        alert('El carrito está vacío. Por favor agrega productos antes de continuar.');
-        return;
-    }
+            if (cart.length === 0) {
+                alert('El carrito está vacío. Por favor agrega productos antes de continuar.');
+                return;
+            }
 
-    const name = document.getElementById('cust-name').value;
-    const email = document.getElementById('cust-email').value;
-    const phone = document.getElementById('cust-phone').value;
-    const notes = document.getElementById('cust-notes').value;
+            const name = document.getElementById('cust-name').value;
+            const email = document.getElementById('cust-email').value;
+            const phone = document.getElementById('cust-phone').value;
+            const notes = document.getElementById('cust-notes').value;
 
-    // 1. GENERAR Y DESCARGAR ARCHIVO EXCEL (.XLSX)
-    const excelData = [];
-    excelData.push(["RESUMEN DE ORDEN DE COMPRA"]);
-    excelData.push(["Fecha:", new Date().toLocaleString('es-MX')]);
-    excelData.push(["Cliente:", name]);
-    excelData.push(["Correo:", email]);
-    excelData.push(["Teléfono:", phone]);
-    excelData.push(["Notas/Dirección:", notes]);
-    excelData.push([]); 
+            // 1. GENERAR ARCHIVO EXCEL (.XLSX)
+            const excelData = [];
+            
+            excelData.push(["RESUMEN DE ORDEN DE COMPRA"]);
+            excelData.push(["Fecha:", new Date().toLocaleString('es-MX')]);
+            excelData.push(["Cliente:", name]);
+            excelData.push(["Correo:", email]);
+            excelData.push(["Teléfono:", phone]);
+            excelData.push(["Notas/Dirección:", notes]);
+            excelData.push([]);
 
-    excelData.push(["ID Producto", "Nombre del Producto", "Precio Unitario", "Cantidad", "Subtotal"]);
-    
-    let granTotal = 0;
-    cart.forEach(item => {
-        const sub = item.price * item.quantity;
-        granTotal += sub;
-        excelData.push([item.id, item.name, item.price, item.quantity, sub]);
-    });
+            excelData.push(["ID Producto", "Nombre del Producto", "Precio Unitario (USD)", "Cantidad", "Subtotal (USD)"]);
+            
+            let granTotal = 0;
+            cart.forEach(item => {
+                const sub = item.price * item.quantity;
+                granTotal += sub;
+                excelData.push([item.id, item.name, item.price, item.quantity, sub]);
+            });
 
-    excelData.push([]);
-    excelData.push(["", "", "", "TOTAL A PAGAR:", granTotal]);
+            excelData.push([]);
+            excelData.push(["", "", "", "TOTAL A PAGAR:", granTotal]);
 
-    const ws = XLSX.utils.aoa_to_sheet(excelData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Orden_de_Compra");
+            const ws = XLSX.utils.aoa_to_sheet(excelData);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Orden_de_Compra");
 
-    const fileName = `Orden_${name.replace(/\s+/g, '_')}.xlsx`;
-    XLSX.writeFile(wb, fileName);
+            const fileName = `Orden_Compra_${name.replace(/\s+/g, '_')}_${Date.now()}.xlsx`;
 
-    // 2. CREAR MENSAJE PARA WHATSAPP
-    let waMessage = `*¡NUEVA ORDEN DE COMPRA!* 🛒\n\n`;
-    waMessage += `*Cliente:* ${name}\n`;
-    waMessage += `*Teléfono:* ${phone}\n`;
-    waMessage += `*Correo:* ${email}\n`;
-    if (notes) waMessage += `*Notas:* ${notes}\n`;
-    waMessage += `\n*Detalle del Pedido:*\n`;
+            // Descargar Excel
+            XLSX.writeFile(wb, fileName);
 
-    cart.forEach(item => {
-        waMessage += `• ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
-    });
+            // 2. CONSTRUIR MENSAJE Y ABRIR WHATSAPP API
+            let waMessage = `*¡NUEVA ORDEN DE COMPRA!* 🛒\n\n`;
+            waMessage += `*Cliente:* ${name}\n`;
+            waMessage += `*Teléfono:* ${phone}\n`;
+            waMessage += `*Correo:* ${email}\n`;
+            if (notes) waMessage += `*Notas/Dirección:* ${notes}\n`;
+            waMessage += `\n*Detalle del Pedido:*\n`;
 
-    waMessage += `\n*TOTAL: $${granTotal.toFixed(2)} USD*\n\n`;
-    waMessage += `_(Se ha generado el comprobante en Excel en mi dispositivo para enviarlo)_`;
+            cart.forEach(item => {
+                waMessage += `• ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)} USD\n`;
+            });
 
-    // REEMPLAZA ESTE NÚMERO CON TU NÚMERO COMERCIAL (incluye código de país, ej: 521...)
-    const myPhoneNumber = "+529581098287"; 
+            waMessage += `\n*TOTAL A PAGAR: $${granTotal.toFixed(2)} USD*\n\n`;
+            waMessage += `_(Se ha descargado el comprobante en Excel en mi dispositivo)_`;
 
-    const waUrl = `https://api.whatsapp.com/send?phone=${myPhoneNumber}&text=${encodeURIComponent(waMessage)}`;
+            const waUrl = `https://api.whatsapp.com/send?phone=${CONFIG.WHATSAPP_NUMBER}&text=${encodeURIComponent(waMessage)}`;
 
-    alert("¡Pedido generado!\n\n1. Se ha descargado la hoja de Excel en tu dispositivo.\n2. Te redirigiremos a WhatsApp para confirmar tu pedido.");
+            alert("¡Orden procesada con éxito!\n\n1. Se ha descargado la hoja de Excel con el resumen de tu compra.\n2. Te redirigiremos a WhatsApp para enviar el pedido.");
 
-    // Abrir WhatsApp en pestaña nueva
-    window.open(waUrl, '_blank');
+            window.open(waUrl, '_blank');
 
-    // Resetear carrito
-    cart = [];
-    updateCartUI();
-    closeCart();
-    document.getElementById('checkoutForm').reset();
-}
+            // Resetear carrito
+            cart = [];
+            updateCartUI();
+            closeCart();
+            document.getElementById('checkoutForm').reset();
+        }
     </script>
 </body>
 </html>

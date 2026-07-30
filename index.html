@@ -239,11 +239,31 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
+        .img-container {
+            position: relative;
+            cursor: pointer;
+        }
+
         .product-img {
             width: 100%;
             height: 240px;
             object-fit: cover;
             border-bottom: 1px solid var(--border-color);
+            display: block;
+        }
+
+        .gallery-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(44, 62, 53, 0.85);
+            color: white;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            pointer-events: none;
         }
 
         .product-info {
@@ -344,7 +364,7 @@
             background-color: var(--accent-hover);
         }
 
-        /* MODAL CARRITO & CHECKOUT RESPONSIVO */
+        /* MODAL GENERAL Y GALERÍA */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -352,7 +372,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 2000;
         }
 
@@ -390,6 +410,39 @@
             font-size: 24px;
             cursor: pointer;
             color: var(--text-muted);
+        }
+
+        /* ESTILOS ESPECÍFICOS DEL POPUP DE GALERÍA DE FOTOS */
+        .gallery-main-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .thumb-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            opacity: 0.7;
+            transition: opacity 0.2s, border-color 0.2s;
+        }
+
+        .thumb-img.active, .thumb-img:hover {
+            opacity: 1;
+            border-color: var(--accent-green);
         }
 
         .delivery-summary-badge {
@@ -485,7 +538,6 @@
             font-family: inherit;
         }
 
-        /* CHECKBOX CONFIRMACIÓN OBLIGATORIA */
         .form-group-checkbox {
             display: flex;
             align-items: flex-start;
@@ -515,7 +567,7 @@
         }
 
         .submit-order-btn {
-            background-color: #25D366; /* Verde WhatsApp */
+            background-color: #25D366;
             color: white;
             border: none;
             width: 100%;
@@ -545,7 +597,6 @@
             font-size: 13px;
         }
 
-        /* MEDIA QUERIES PARA PANTALLAS MÁS GRANDES */
         @media (min-width: 600px) {
             .hero h1 { font-size: 42px; }
             .product-grid {
@@ -607,7 +658,9 @@
         <div class="product-grid">
             <!-- PRODUCTO 1 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Monstera Deliciosa">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Monstera Deliciosa">
+                </div>
                 <div class="product-info">
                     <div class="product-title">Monstera Deliciosa</div>
                     <div class="product-desc">Planta tropical de hojas anchas y caladas. Ideal para interiores luminosos.</div>
@@ -623,9 +676,16 @@
                 </div>
             </div>
 
-            <!-- PRODUCTO 2 -->
+            <!-- PRODUCTO 2: FICUS LYRATA (CON POPUP DE GALERÍA) -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Ficus Lyrata">
+                <div class="img-container" onclick="openGallery('Ficus Lyrata', [
+                    'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1592150621744-aca64f48394a?auto=format&fit=crop&w=800&q=80'
+                ])">
+                    <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Ficus Lyrata">
+                    <span class="gallery-badge">📷 Ver fotos</span>
+                </div>
                 <div class="product-info">
                     <div class="product-title">Ficus Lyrata</div>
                     <div class="product-desc">Árbol de lira escultórico, perfecto como punto focal en salas y oficinas.</div>
@@ -643,7 +703,9 @@
 
             <!-- PRODUCTO 3 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Calathea Orbifolia">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Calathea Orbifolia">
+                </div>
                 <div class="product-info">
                     <div class="product-title">Calathea Orbifolia</div>
                     <div class="product-desc">Hojas redondas con un patrón de rayas verdes finas e impresionantes.</div>
@@ -661,7 +723,9 @@
 
             <!-- PRODUCTO 4 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Maceta Cerámica Beige">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Maceta Cerámica Beige">
+                </div>
                 <div class="product-info">
                     <div class="product-title">Maceta Cerámica Beige</div>
                     <div class="product-desc">Hecha a mano con textura mate y plato integrado para drenaje.</div>
@@ -679,7 +743,9 @@
 
             <!-- PRODUCTO 5 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Sansevieria Trifasciata">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Sansevieria Trifasciata">
+                </div>
                 <div class="product-info">
                     <div class="product-title">Sansevieria Trifasciata</div>
                     <div class="product-desc">Extremadamente resistente y purificadora del aire. Muy bajo mantenimiento.</div>
@@ -697,7 +763,9 @@
 
             <!-- PRODUCTO 6 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Pothos Dorado">
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Pothos Dorado">
+                </div>
                 <div class="product-info">
                     <div class="product-title">Pothos Dorado</div>
                     <div class="product-desc">Planta colgante de rápido crecimiento y hermosas hojas acorazonadas.</div>
@@ -715,6 +783,18 @@
         </div>
     </main>
 
+    <!-- POPUP / MODAL GALERÍA DE FOTOS -->
+    <div class="modal-overlay" id="galleryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="gallery-title">Galería de Fotos</div>
+                <div class="close-modal" onclick="closeGallery()">&times;</div>
+            </div>
+            <img id="gallery-main" class="gallery-main-img" src="" alt="Vista amplia">
+            <div id="gallery-thumbs" class="gallery-thumbnails"></div>
+        </div>
+    </div>
+
     <!-- MODAL CARRITO & CHECKOUT -->
     <div class="modal-overlay" id="cartModal">
         <div class="modal-content">
@@ -723,7 +803,6 @@
                 <div class="close-modal" onclick="closeCart()">&times;</div>
             </div>
 
-            <!-- RESUMEN DEL RANGO SELECCIONADO -->
             <div class="delivery-summary-badge" id="modal-date-display">
                 📅 Rango de Entrega: <span id="summary-date-text">No seleccionado</span>
             </div>
@@ -739,9 +818,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody id="cart-items-body">
-                        <!-- Filas dinámicas por JS -->
-                    </tbody>
+                    <tbody id="cart-items-body"></tbody>
                 </table>
             </div>
 
@@ -749,7 +826,6 @@
                 Total: $<span id="cart-total">0.00</span> USD
             </div>
 
-            <!-- FORMULARIO DE ENVÍO -->
             <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
                 <h3>Datos de Contacto para WhatsApp</h3>
                 <div class="form-group">
@@ -769,7 +845,6 @@
                     <textarea id="cust-notes" rows="2" placeholder="Dirección completa y referencias..."></textarea>
                 </div>
 
-                <!-- CASILLA OBLIGATORIA DE CONFIRMACIÓN -->
                 <div class="form-group-checkbox">
                     <input type="checkbox" id="confirm-terms" required>
                     <label for="confirm-terms">
@@ -796,7 +871,6 @@
 
         let cart = [];
 
-        // Bloquear fechas pasadas al cargar la página
         document.addEventListener("DOMContentLoaded", function() {
             const startDate = document.getElementById('start-date');
             const endDate = document.getElementById('end-date');
@@ -806,7 +880,6 @@
             endDate.setAttribute('min', today);
         });
 
-        // Al cambiar la fecha de inicio, la fecha de término no puede ser anterior
         function handleStartDateChange() {
             const startDateVal = document.getElementById('start-date').value;
             const endDateInput = document.getElementById('end-date');
@@ -819,7 +892,34 @@
             }
         }
 
-        // Función para ajustar los botones + y - en las tarjetas de producto
+        /* LÓGICA DE GALERÍA DE FOTOS */
+        function openGallery(title, images) {
+            document.getElementById('gallery-title').innerText = title;
+            const mainImg = document.getElementById('gallery-main');
+            const thumbsContainer = document.getElementById('gallery-thumbs');
+
+            mainImg.src = images[0];
+            thumbsContainer.innerHTML = '';
+
+            images.forEach((imgUrl, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgUrl;
+                thumb.className = `thumb-img ${index === 0 ? 'active' : ''}`;
+                thumb.onclick = function() {
+                    mainImg.src = imgUrl;
+                    document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                };
+                thumbsContainer.appendChild(thumb);
+            });
+
+            document.getElementById('galleryModal').style.display = 'block';
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').style.display = 'none';
+        }
+
         function adjustCardQty(inputId, delta) {
             const input = document.getElementById(inputId);
             let val = parseInt(input.value) || 1;
@@ -828,7 +928,6 @@
             input.value = val;
         }
 
-        // Agregar al carrito leyendo la cantidad seleccionada en la tarjeta
         function addToCart(id, name, price, qtyInputId) {
             const startDate = document.getElementById('start-date').value;
             const endDate = document.getElementById('end-date').value;
@@ -846,7 +945,6 @@
                 return;
             }
 
-            // Obtener la cantidad del input de la tarjeta
             const qtyInput = document.getElementById(qtyInputId);
             const quantityToAdd = parseInt(qtyInput.value) || 1;
 
@@ -857,12 +955,10 @@
                 cart.push({ id: id, name: name, price: price, quantity: quantityToAdd });
             }
             
-            // Reiniciar el contador de la tarjeta a 1 tras agregar
             qtyInput.value = 1;
 
             updateCartUI();
 
-            // Animación sutil en el botón del carrito
             const cartBtn = document.getElementById('cart-button');
             cartBtn.style.transform = 'scale(1.15)';
             setTimeout(() => {
@@ -870,7 +966,6 @@
             }, 200);
         }
 
-        // Modificar cantidad desde dentro del modal del carrito
         function updateQuantity(id, qty) {
             const item = cart.find(i => i.id === id);
             if (item) {
@@ -880,13 +975,11 @@
             updateCartUI();
         }
 
-        // Eliminar producto
         function removeFromCart(id) {
             cart = cart.filter(item => item.id !== id);
             updateCartUI();
         }
 
-        // Actualizar Interfaz del Carrito
         function updateCartUI() {
             const body = document.getElementById('cart-items-body');
             const countSpan = document.getElementById('cart-count');
@@ -928,7 +1021,6 @@
             totalSpan.innerText = total.toFixed(2);
         }
 
-        // Abrir/Cerrar Modal
         function openCart() {
             document.getElementById('cartModal').style.display = 'block';
         }
@@ -937,7 +1029,6 @@
             document.getElementById('cartModal').style.display = 'none';
         }
 
-        // PROCESO DE CHECKOUT Y ENVÍO A WHATSAPP
         function handleCheckout(e) {
             e.preventDefault();
 

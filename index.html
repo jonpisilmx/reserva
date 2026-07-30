@@ -320,7 +320,6 @@
             outline: none;
         }
 
-        /* Ocultar flechas nativas del input number */
         .card-qty-input::-webkit-outer-spin-button,
         .card-qty-input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -484,6 +483,35 @@
             border-radius: 6px;
             font-size: 14px;
             font-family: inherit;
+        }
+
+        /* CHECKBOX CONFIRMACIÓN OBLIGATORIA */
+        .form-group-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 18px 0;
+            padding: 10px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .form-group-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .form-group-checkbox label {
+            font-size: 12px;
+            color: var(--text-main);
+            line-height: 1.4;
+            cursor: pointer;
+            font-weight: 400;
         }
 
         .submit-order-btn {
@@ -739,6 +767,14 @@
                 <div class="form-group">
                     <label>Dirección de Envío / Notas Adicionales</label>
                     <textarea id="cust-notes" rows="2" placeholder="Dirección completa y referencias..."></textarea>
+                </div>
+
+                <!-- CASILLA OBLIGATORIA DE CONFIRMACIÓN -->
+                <div class="form-group-checkbox">
+                    <input type="checkbox" id="confirm-terms" required>
+                    <label for="confirm-terms">
+                        Al enviar este formulario confirmo que el número y tipo de servicios solicitados así como las fechas establecidas son correctas y que los datos que proporciono servirán como la referencia principal para configurar mi compra.
+                    </label>
                 </div>
 
                 <button type="submit" class="submit-order-btn">

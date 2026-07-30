@@ -349,6 +349,7 @@
             border: 1px solid var(--border-color);
             border-radius: 6px;
             font-size: 14px;
+            font-family: inherit;
         }
 
         .submit-order-btn {
@@ -523,6 +524,13 @@
             <!-- FORMULARIO DE ENVÍO -->
             <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
                 <h3>Datos para Confirmar por WhatsApp</h3>
+                
+                <!-- CALENDARIO DE FECHA DE ENTREGA -->
+                <div class="form-group">
+                    <label>📅 Fecha Deseada de Entrega *</label>
+                    <input type="date" id="delivery-date" required>
+                </div>
+
                 <div class="form-group">
                     <label>Nombre Completo *</label>
                     <input type="text" id="cust-name" required placeholder="Ej. Ana García">
@@ -558,6 +566,13 @@
         };
 
         let cart = [];
+
+        // Bloquear fechas pasadas en el calendario al cargar la página
+        document.addEventListener("DOMContentLoaded", function() {
+            const dateInput = document.getElementById('delivery-date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        });
 
         // Agregar al carrito
         function addToCart(id, name, price) {
@@ -639,6 +654,7 @@
                 return;
             }
 
+            const deliveryDate = document.getElementById('delivery-date').value;
             const name = document.getElementById('cust-name').value;
             const email = document.getElementById('cust-email').value;
             const phone = document.getElementById('cust-phone').value;
@@ -647,10 +663,11 @@
             // CONSTRUIR MENSAJE Y ABRIR WHATSAPP API
             let granTotal = 0;
             let waMessage = `*¡NUEVA ORDEN DE COMPRA!* 🛒\n\n`;
-            waMessage += `*Cliente:* ${name}\n`;
-            waMessage += `*Teléfono:* ${phone}\n`;
-            waMessage += `*Correo:* ${email}\n`;
-            if (notes) waMessage += `*Notas/Dirección:* ${notes}\n`;
+            waMessage += `📅 *Fecha Estimada de Entrega:* ${deliveryDate}\n`;
+            waMessage += `👤 *Cliente:* ${name}\n`;
+            waMessage += `📞 *Teléfono:* ${phone}\n`;
+            waMessage += `✉️ *Correo:* ${email}\n`;
+            if (notes) waMessage += `📝 *Notas/Dirección:* ${notes}\n`;
             waMessage += `\n*Detalle del Pedido:*\n`;
 
             cart.forEach(item => {

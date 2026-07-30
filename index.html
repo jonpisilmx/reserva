@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verde & Armonía — Tienda de Plantas y Botánica</title>
+    <style>
+        :root {
+            --bg-primary: #F4F6F0;
+            --bg-card: #FFFFFF;
+            --text-main: #2C3E35;
+            --text-muted: #6B7C73;
+            --accent-green: #3B5E4B;
+            --accent-hover: #294334;
+            --accent-light: #E2E8E0;
+            --border-color: #D6DEC2;
+            --font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAV */
+        header {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            display: table;
+            width: 100%;
+        }
+
+        .logo {
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--accent-green);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            margin-left: 25px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .cart-trigger {
+            background-color: var(--accent-green);
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .cart-trigger:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 53, 0.4), rgba(44, 62, 53, 0.4)), url('https://images.unsplash.com/photo-1470058869958-2a77ade41c02?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            font-weight: 300;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: #FFFFFF;
+            color: var(--accent-green);
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: var(--accent-light);
+        }
+
+        /* MAIN CATALOG CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            color: var(--accent-green);
+            margin-bottom: 30px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* PRODUCT GRID (USANDO TABLE LAYOUT PARA COMPATIBILIDAD PERFECTA) */
+        .product-grid {
+            width: 100%;
+            display: table;
+            table-layout: fixed;
+            border-spacing: 20px;
+        }
+
+        .product-row {
+            display: table-row;
+        }
+
+        .product-card {
+            display: table-cell;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            vertical-align: top;
+            padding-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .product-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            min-height: 40px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* MODAL CARRITO & CHECKOUT */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            width: 90%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: table;
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            display: table-cell;
+            font-size: 22px;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .close-modal {
+            display: table-cell;
+            text-align: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* TABLA CARRITO */
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .cart-table th {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .cart-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+            font-size: 14px;
+        }
+
+        .qty-input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .remove-btn {
+            color: #C0392B;
+            cursor: pointer;
+            font-weight: bold;
+            background: none;
+            border: none;
+            font-size: 16px;
+        }
+
+        .cart-summary {
+            text-align: right;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 25px;
+        }
+
+        /* FORMULARIO DE CLIENTE */
+        .checkout-form h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .submit-order-btn {
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+
+        .submit-order-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--accent-green);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            font-size: 14px;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">VERDE & ARMONÍA</div>
+            <div class="nav-links">
+                <a href="#catalogo">Colección</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="javascript:void(0)" class="cart-trigger" onclick="openCart()">🛒 Carrito (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Diseño Botánico para tu Espacio</h1>
+        <p>Transforma tu hogar u oficina con nuestra selección exclusiva de plantas de interior y accesorios artesanales.</p>
+        <a href="#catalogo" class="hero-btn">Explorar Catálogo</a>
+    </section>
+
+    <!-- CATALOGO DE PRODUCTOS (EDITABLE EN EL HTML) -->
+    <main class="container" id="catalogo">
+        <h2 class="section-title">Nuestra Colección</h2>
+
+        <div class="product-grid">
+            <!-- FILA 1 -->
+            <div class="product-row">
+                <!-- PRODUCTO 1 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Monstera Deliciosa">
+                    <div class="product-info">
+                        <div class="product-title">Monstera Deliciosa</div>
+                        <div class="product-desc">Planta tropical de hojas anchas y caladas. Ideal para interiores luminosos.</div>
+                        <div class="product-price">$45.00</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(1, 'Monstera Deliciosa', 45.00)">Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <!-- PRODUCTO 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Ficus Lyrata">
+                    <div class="product-info">
+                        <div class="product-title">Ficus Lyrata</div>
+                        <div class="product-desc">Árbol de lira escultórico, perfecto como punto focal en salas y oficinas.</div>
+                        <div class="product-price">$62.00</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(2, 'Ficus Lyrata', 62.00)">Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <!-- PRODUCTO 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Calathea Orbifolia">
+                    <div class="product-info">
+                        <div class="product-title">Calathea Orbifolia</div>
+                        <div class="product-desc">Hojas redondas con un patrón de rayas verdes finas e impresionantes.</div>
+                        <div class="product-price">$38.00</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(3, 'Calathea Orbifolia', 38.00)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILA 2 -->
+            <div class="product-row">
+                <!-- PRODUCTO 4 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Maceta Cerámica Beige">
+                    <div class="product-info">
+                        <div class="product-title">Maceta Cerámica Beige</div>
+                        <div class="product-desc">Hecha a mano con textura mate y plato integrado para drenaje.</div>
+                        <div class="product-price">$25.00</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(4, 'Maceta Cerámica Beige', 25.00)">Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <!-- PRODUCTO 5 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Sansevieria Trifasciata">
+                    <div class="product-info">
+                        <div class="product-title">Sansevieria Trifasciata</div>
+                        <div class="product-desc">Extremadamente resistente y purificadora del aire. Muy bajo mantenimiento.</div>
+                        <div class="product-price">$29.00</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(5, 'Sansevieria Trifasciata', 29.00)">Agregar al Carrito</button>
+                    </div>
+                </div>
+
+                <!-- PRODUCTO 6 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Pothos Dorado">
+                    <div class="product-info">
+                        <div class="product-title">Pothos Dorado</div>
+                        <div class="product-desc">Planta colgante de rápido crecimiento y hermosas hojas acorazonadas.</div>
+                        <div class="product-price">$20.00</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(6, 'Pothos Dorado', 20.00)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL CARRITO & CHECKOUT -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Tu Pedido</div>
+                <div class="close-modal" onclick="closeCart()">&times;</div>
+            </div>
+
+            <!-- TABLA DE PRODUCTOS EN EL CARRITO -->
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cant.</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items-body">
+                    <!-- Filas dinámicas por JS -->
+                </tbody>
+            </table>
+
+            <div class="cart-summary">
+                Total: $<span id="cart-total">0.00</span> USD
+            </div>
+
+            <!-- FORMULARIO DE ENVÍO -->
+            <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
+                <h3>Datos para la Confirmación de Orden</h3>
+                <div class="form-group">
+                    <label>Nombre Completo *</label>
+                    <input type="text" id="cust-name" required placeholder="Ej. Ana García">
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico *</label>
+                    <input type="email" id="cust-email" required placeholder="tuemail@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono / WhatsApp *</label>
+                    <input type="tel" id="cust-phone" required placeholder="+52 951 123 4567">
+                </div>
+                <div class="form-group">
+                    <label>Dirección de Envío / Notas Adicionales</label>
+                    <textarea id="cust-notes" rows="2" placeholder="Dirección completa y referencias..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-order-btn">🚀 Generar y Enviar Pedido por Correo</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Verde & Armonía — Tienda Botánica. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- LÓGICA DE JAVASCRIPT Y PROCESAMIENTO DE EXCEL (XLSX) -->
+    <!-- Carga de SheetJS para generación nativa de hojas de cálculo Excel desde el navegador -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+    <script>
+        // CONFIGURACIÓN: Reemplaza con tu EmailJS User ID, Service ID y Template ID si usas envío automático sin backend
+        const CONFIG = {
+            STORE_EMAIL: "ventas@verdeyarmonia.com",
+            ENABLE_AUTOMATIC_EMAILJS: false // Cambiar a true si configuras EmailJS
+        };
+
+        let cart = [];
+
+        // Agregar al carrito
+        function addToCart(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id: id, name: name, price: price, quantity: 1 });
+            }
+            updateCartUI();
+            openCart();
+        }
+
+        // Modificar cantidad
+        function updateQuantity(id, qty) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.quantity = parseInt(qty) || 1;
+                if (item.quantity <= 0) item.quantity = 1;
+            }
+            updateCartUI();
+        }
+
+        // Eliminar producto
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        // Actualizar Interfaz del Carrito
+        function updateCartUI() {
+            const body = document.getElementById('cart-items-body');
+            const countSpan = document.getElementById('cart-count');
+            const totalSpan = document.getElementById('cart-total');
+
+            body.innerHTML = '';
+            let total = 0;
+            let totalCount = 0;
+
+            if (cart.length === 0) {
+                body.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888; padding:20px;">El carrito está vacío</td></tr>';
+            } else {
+                cart.forEach(item => {
+                    const subtotal = item.price * item.quantity;
+                    total += subtotal;
+                    totalCount += item.quantity;
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong>${item.name}</strong></td>
+                        <td>$${item.price.toFixed(2)}</td>
+                        <td><input type="number" class="qty-input" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)"></td>
+                        <td>$${subtotal.toFixed(2)}</td>
+                        <td><button class="remove-btn" onclick="removeFromCart(${item.id})">&times;</button></td>
+                    `;
+                    body.appendChild(tr);
+                });
+            }
+
+            countSpan.innerText = totalCount;
+            totalSpan.innerText = total.toFixed(2);
+        }
+
+        // Abrir/Cerrar Modal
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // PROCESO DE CHECKOUT Y GENERACIÓN DE EXCEL
+        function handleCheckout(e) {
+            e.preventDefault();
+
+            if (cart.length === 0) {
+                alert('El carrito está vacío. Por favor agrega productos antes de continuar.');
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value;
+            const email = document.getElementById('cust-email').value;
+            const phone = document.getElementById('cust-phone').value;
+            const notes = document.getElementById('cust-notes').value;
+
+            // 1. GENERAR ARCHIVO EXCEL (.XLSX)
+            const excelData = [];
+            
+            // Encabezado del Pedido
+            excelData.push(["RESUMEN DE ORDEN DE COMPRA"]);
+            excelData.push(["Fecha:", new Date().toLocaleString('es-MX')]);
+            excelData.push(["Cliente:", name]);
+            excelData.push(["Correo:", email]);
+            excelData.push(["Teléfono:", phone]);
+            excelData.push(["Notas/Dirección:", notes]);
+            excelData.push([]); // Línea en blanco
+
+            // Detalle de Productos
+            excelData.push(["ID Producto", "Nombre del Producto", "Precio Unitario (USD)", "Cantidad", "Subtotal (USD)"]);
+            
+            let granTotal = 0;
+            cart.forEach(item => {
+                const sub = item.price * item.quantity;
+                granTotal += sub;
+                excelData.push([item.id, item.name, item.price, item.quantity, sub]);
+            });
+
+            excelData.push([]);
+            excelData.push(["", "", "", "TOTAL A PAGAR:", granTotal]);
+
+            // Crear Hoja de Cálculo con SheetJS
+            const ws = XLSX.utils.aoa_to_sheet(excelData);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Orden_de_Compra");
+
+            // Nombre del archivo
+            const fileName = `Orden_Compra_${name.replace(/\s+/g, '_')}_${Date.now()}.xlsx`;
+
+            // Descargar el archivo Excel automáticamente
+            XLSX.writeFile(wb, fileName);
+
+            // 2. ABRIR CLIENTE DE CORREO (mailto) CON EL DETALLE COMPLETO
+            let emailBody = `Hola, adjunto la orden de compra en formato Excel para procesar mi pedido.\n\n`;
+            emailBody += `--- DATOS DEL CLIENTE ---\n`;
+            emailBody += `Nombre: ${name}\n`;
+            emailBody += `Correo: ${email}\n`;
+            emailBody += `Teléfono: ${phone}\n`;
+            emailBody += `Notas / Dirección: ${notes}\n\n`;
+            emailBody += `--- DETALLE DEL PEDIDO ---\n`;
+            
+            cart.forEach(item => {
+                emailBody += `- ${item.name} x${item.quantity} : $${(item.price * item.quantity).toFixed(2)} USD\n`;
+            });
+            emailBody += `\nTOTAL: $${granTotal.toFixed(2)} USD\n\n`;
+            emailBody += `(El archivo Excel de esta orden se ha descargado en mi dispositivo para adjuntarlo en este mensaje).`;
+
+            const mailtoUrl = `mailto:${CONFIG.STORE_EMAIL}?subject=${encodeURIComponent("Nueva Orden de Compra: " + name)}&body=${encodeURIComponent(emailBody)}`;
+
+            alert("¡Orden procesada con éxito!
+
+1. Se ha descargado automáticamente la hoja de Excel con el resumen de tu compra.
+2. Se abrirá tu aplicación de correo para enviar la información al vendedor (no olvides adjuntar el archivo Excel generado).");
+
+            window.location.href = mailtoUrl;
+
+            // Resetear carrito
+            cart = [];
+            updateCartUI();
+            closeCart();
+            document.getElementById('checkoutForm').reset();
+        }
+    </script>
+</body>
+</html>

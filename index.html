@@ -148,7 +148,7 @@
         /* PRODUCT GRID CON CSS GRID RESPONSIVO */
         .product-grid {
             display: grid;
-            grid-template-columns: 1fr; /* 1 columna en celulares */
+            grid-template-columns: 1fr;
             gap: 20px;
             width: 100%;
         }
@@ -386,14 +386,14 @@
         @media (min-width: 600px) {
             .hero h1 { font-size: 42px; }
             .product-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (min-width: 900px) {
             .hero h1 { font-size: 48px; }
             .product-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 columnas en escritorio */
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
@@ -541,7 +541,7 @@
                 </div>
 
                 <button type="submit" class="submit-order-btn">
-                    📲 Generar Excel y Enviar por WhatsApp
+                    📲 Enviar Pedido por WhatsApp
                 </button>
             </form>
         </div>
@@ -551,13 +551,10 @@
         <p>&copy; 2026 Verde & Armonía — Tienda Botánica. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- LÓGICA DE JAVASCRIPT Y PROCESAMIENTO DE EXCEL (XLSX) -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
+    <!-- LÓGICA DE JAVASCRIPT -->
     <script>
-        // CONFIGURACIÓN DE WHATSAPP
         const CONFIG = {
-            WHATSAPP_NUMBER: "529581098287" // +52 958 109 8287
+            WHATSAPP_NUMBER: "529581098287"
         };
 
         let cart = [];
@@ -647,39 +644,8 @@
             const phone = document.getElementById('cust-phone').value;
             const notes = document.getElementById('cust-notes').value;
 
-            // 1. GENERAR ARCHIVO EXCEL (.XLSX)
-            const excelData = [];
-            
-            excelData.push(["RESUMEN DE ORDEN DE COMPRA"]);
-            excelData.push(["Fecha:", new Date().toLocaleString('es-MX')]);
-            excelData.push(["Cliente:", name]);
-            excelData.push(["Correo:", email]);
-            excelData.push(["Teléfono:", phone]);
-            excelData.push(["Notas/Dirección:", notes]);
-            excelData.push([]);
-
-            excelData.push(["ID Producto", "Nombre del Producto", "Precio Unitario (USD)", "Cantidad", "Subtotal (USD)"]);
-            
+            // CONSTRUIR MENSAJE Y ABRIR WHATSAPP API
             let granTotal = 0;
-            cart.forEach(item => {
-                const sub = item.price * item.quantity;
-                granTotal += sub;
-                excelData.push([item.id, item.name, item.price, item.quantity, sub]);
-            });
-
-            excelData.push([]);
-            excelData.push(["", "", "", "TOTAL A PAGAR:", granTotal]);
-
-            const ws = XLSX.utils.aoa_to_sheet(excelData);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Orden_de_Compra");
-
-            const fileName = `Orden_Compra_${name.replace(/\s+/g, '_')}_${Date.now()}.xlsx`;
-
-            // Descargar Excel
-            XLSX.writeFile(wb, fileName);
-
-            // 2. CONSTRUIR MENSAJE Y ABRIR WHATSAPP API
             let waMessage = `*¡NUEVA ORDEN DE COMPRA!* 🛒\n\n`;
             waMessage += `*Cliente:* ${name}\n`;
             waMessage += `*Teléfono:* ${phone}\n`;
@@ -688,15 +654,14 @@
             waMessage += `\n*Detalle del Pedido:*\n`;
 
             cart.forEach(item => {
-                waMessage += `• ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)} USD\n`;
+                const sub = item.price * item.quantity;
+                granTotal += sub;
+                waMessage += `• ${item.name} (x${item.quantity}) - $${sub.toFixed(2)} USD\n`;
             });
 
-            waMessage += `\n*TOTAL A PAGAR: $${granTotal.toFixed(2)} USD*\n\n`;
-            waMessage += `_(Se ha descargado el comprobante en Excel en mi dispositivo)_`;
+            waMessage += `\n*TOTAL A PAGAR: $${granTotal.toFixed(2)} USD*`;
 
             const waUrl = `https://api.whatsapp.com/send?phone=${CONFIG.WHATSAPP_NUMBER}&text=${encodeURIComponent(waMessage)}`;
-
-            alert("¡Orden procesada con éxito!\n\n1. Se ha descargado la hoja de Excel con el resumen de tu compra.\n2. Te redirigiremos a WhatsApp para enviar el pedido.");
 
             window.open(waUrl, '_blank');
 

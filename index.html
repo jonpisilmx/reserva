@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verde & Armonía — Tienda de Plantas y Botánica</title>
+    <title>Reserva tu Experiencia Costera</title>
     <style>
         :root {
-            --bg-primary: #F4F6F0;
+            --bg-primary: #F7F5F0;
             --bg-card: #FFFFFF;
-            --text-main: #2C3E35;
-            --text-muted: #6B7C73;
-            --accent-green: #3B5E4B;
-            --accent-hover: #294334;
-            --accent-light: #E2E8E0;
-            --border-color: #D6DEC2;
+            --text-main: #2C3531;
+            --text-muted: #6B7C75;
+            --accent-green: #2D5A27; /* Verde selva/palapa */
+            --accent-hover: #1E3D1A;
+            --accent-light: #E8EFE6;
+            --border-color: #D8E2D5;
             --font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
@@ -28,7 +28,7 @@
             background-color: var(--bg-primary);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 80px; /* Margen inferior para que la barra flotante no tape el footer */
+            padding-bottom: 80px;
         }
 
         /* HEADER & NAV RESPONSIVO */
@@ -52,7 +52,7 @@
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             letter-spacing: 1.5px;
             color: var(--accent-green);
@@ -96,7 +96,7 @@
             position: fixed;
             bottom: 20px;
             left: 50%;
-            transform: translateX(-50%) translateY(100px); /* Oculto inicialmente */
+            transform: translateX(-50%) translateY(100px);
             background-color: #FFFFFF;
             border: 2px solid var(--accent-green);
             border-radius: 30px;
@@ -154,11 +154,11 @@
             background-color: var(--accent-hover);
         }
 
-        /* HERO SECTION RESPONSIVO */
+        /* HERO SECTION ESTILO MAZUNTE */
         .hero {
-            background: linear-gradient(rgba(44, 62, 53, 0.4), rgba(44, 62, 53, 0.4)), url('https://images.unsplash.com/photo-1470058869958-2a77ade41c02?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
             color: white;
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
         }
 
@@ -218,7 +218,7 @@
             padding: 20px;
             margin-bottom: 35px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(59, 94, 75, 0.08);
+            box-shadow: 0 4px 15px rgba(45, 90, 39, 0.08);
         }
 
         .date-selector-card h3 {
@@ -279,7 +279,7 @@
             border-color: var(--accent-green);
         }
 
-        /* PRODUCT GRID CON CSS GRID RESPONSIVO */
+        /* PRODUCT GRID */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -428,7 +428,7 @@
             background-color: var(--accent-hover);
         }
 
-        /* MODAL GENERAL Y GALERÍA */
+        /* MODALES */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -680,10 +680,10 @@
     <!-- NAV -->
     <header>
         <div class="nav-container">
-            <div class="logo">VERDE & ARMONÍA</div>
+            <div class="logo">POSADA & EXPERIENCIAS</div>
             <div class="nav-links">
-                <a href="#catalogo">Colección</a>
-                <a href="javascript:void(0)" class="cart-trigger" id="cart-button" onclick="openCart()">🛒 Carrito (<span id="cart-count">0</span>)</a>
+                <a href="#catalogo">Catálogo</a>
+                <a href="javascript:void(0)" class="cart-trigger" id="cart-button" onclick="openCart()">🛒 Reserva (<span id="cart-count">0</span>)</a>
             </div>
         </div>
     </header>
@@ -691,167 +691,164 @@
     <!-- BARRA FLOTANTE DE PRESUPUESTO EN VIVO -->
     <div class="budget-floating-bar" id="budget-bar">
         <div class="floating-info">
-            <span class="floating-label">Presupuesto Actual</span>
-            <span class="floating-total">$<span id="floating-total-val">0.00</span> USD (<span id="floating-count-val">0</span> ítems)</span>
+            <span class="floating-label">Presupuesto Estimado</span>
+            <span class="floating-total">$<span id="floating-total-val">0.00</span> MXN (<span id="floating-count-val">0</span> ítems)</span>
         </div>
-        <button class="floating-btn" onclick="openCart()">Ver Carrito 🛒</button>
+        <button class="floating-btn" onclick="openCart()">Ver Reserva 🛒</button>
     </div>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION (HOTEL ESTILO MAZUNTE) -->
     <section class="hero">
-        <h1>Diseño Botánico para tu Espacio</h1>
-        <p>Transforma tu hogar u oficina con nuestra selección exclusiva de plantas de interior y accesorios artesanales.</p>
-        <a href="#catalogo" class="hero-btn">Explorar Catálogo</a>
+        <h1>Tu Refugio en la Costa</h1>
+        <p>Hospedaje eco-rústico y las mejores experiencias de aventura en la costa oaxaqueña.</p>
+        <a href="#catalogo" class="hero-btn">Explorar Servicios</a>
     </section>
 
     <!-- MAIN CATALOG CONTAINER -->
     <main class="container" id="catalogo">
         
-        <!-- PASO 1: SELECCIÓN DE RANGO DE FECHAS -->
+        <!-- PASO 1: SELECCIÓN DE FECHAS -->
         <div class="date-selector-card">
-            <h3>📅 Paso 1: Selecciona el rango de fechas para recibir tu pedido</h3>
-            <p>Elige una ventana de entrega para verificar la disponibilidad de nuestro catálogo.</p>
+            <h3>📅 Paso 1: Selecciona las fechas de tu estancia / viaje</h3>
+            <p>Elige tu fecha de llegada y salida para consultar disponibilidad de habitaciones y tours.</p>
             
             <div class="date-range-wrapper">
                 <div class="date-field">
-                    <label for="start-date">Desde (Fecha de inicio) *</label>
+                    <label for="start-date">Llegada (Fecha inicio) *</label>
                     <input type="date" id="start-date" onchange="handleStartDateChange()">
                 </div>
                 <div class="date-field">
-                    <label for="end-date">Hasta (Fecha de término) *</label>
+                    <label for="end-date">Salida (Fecha término) *</label>
                     <input type="date" id="end-date">
                 </div>
             </div>
         </div>
 
-        <h2 class="section-title">Paso 2: Elige tus Productos</h2>
+        <h2 class="section-title">Paso 2: Personaliza tu Experiencia</h2>
 
-        <!-- PRODUCT GRID -->
+        <!-- PRODUCT GRID CON LAS NUEVAS IMÁGENES -->
         <div class="product-grid">
-            <!-- PRODUCTO 1 -->
+            
+            <!-- ÍTEM 1: HABITACIÓN DE HOTEL -->
             <div class="product-card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Monstera Deliciosa">
+                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Habitación de Hotel Rústica">
                 </div>
                 <div class="product-info">
-                    <div class="product-title">Monstera Deliciosa</div>
-                    <div class="product-desc">Planta tropical de hojas anchas y caladas. Ideal para interiores luminosos.</div>
-                    <div class="product-price">$45.00</div>
+                    <div class="product-title">Habitación Posada Rústica</div>
+                    <div class="product-desc">Cabaña de madera y palapa con vista al mar. Incluye cama King y brisa marina natural.</div>
+                    <div class="product-price">$1,200.00 MXN / noche</div>
                     <div class="card-actions">
                         <div class="card-qty-wrapper">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-1', -1)">-</button>
                             <input type="number" id="qty-1" class="card-qty-input" value="1" min="1">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-1', 1)">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(1, 'Monstera Deliciosa', 45.00, 'qty-1')">Agregar</button>
+                        <button class="add-to-cart-btn" onclick="addToCart(1, 'Habitación Posada Rústica', 1200.00, 'qty-1')">Agregar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCTO 2: FICUS LYRATA (CON POPUP DE GALERÍA) -->
+            <!-- ÍTEM 2: RENTA DE AUTOS -->
             <div class="product-card">
-                <div class="img-container" onclick="openGallery('Ficus Lyrata', [
-                    'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1592150621744-aca64f48394a?auto=format&fit=crop&w=800&q=80'
-                ])">
-                    <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Ficus Lyrata">
-                    <span class="gallery-badge">📷 Ver fotos</span>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Renta de Autos">
                 </div>
                 <div class="product-info">
-                    <div class="product-title">Ficus Lyrata</div>
-                    <div class="product-desc">Árbol de lira escultórico, perfecto como punto focal en salas y oficinas.</div>
-                    <div class="product-price">$62.00</div>
+                    <div class="product-title">Renta de Auto Tout-Terrain</div>
+                    <div class="product-desc">Vehículo adaptado para recorrer con libertad las playas y caminos de la costa.</div>
+                    <div class="product-price">$850.00 MXN / día</div>
                     <div class="card-actions">
                         <div class="card-qty-wrapper">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-2', -1)">-</button>
                             <input type="number" id="qty-2" class="card-qty-input" value="1" min="1">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-2', 1)">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(2, 'Ficus Lyrata', 62.00, 'qty-2')">Agregar</button>
+                        <button class="add-to-cart-btn" onclick="addToCart(2, 'Renta de Auto Tout-Terrain', 850.00, 'qty-2')">Agregar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCTO 3 -->
+            <!-- ÍTEM 3: DESAYUNOS INCLUIDOS -->
             <div class="product-card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Calathea Orbifolia">
+                    <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Desayunos Incluidos">
                 </div>
                 <div class="product-info">
-                    <div class="product-title">Calathea Orbifolia</div>
-                    <div class="product-desc">Hojas redondas con un patrón de rayas verdes finas e impresionantes.</div>
-                    <div class="product-price">$38.00</div>
+                    <div class="product-title">Desayuno Tropical Completo</div>
+                    <div class="product-desc">Fruta de la región, café artesanal, pan recién horneado y platillo fuerte a elegir.</div>
+                    <div class="product-price">$180.00 MXN / pers</div>
                     <div class="card-actions">
                         <div class="card-qty-wrapper">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-3', -1)">-</button>
                             <input type="number" id="qty-3" class="card-qty-input" value="1" min="1">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-3', 1)">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(3, 'Calathea Orbifolia', 38.00, 'qty-3')">Agregar</button>
+                        <button class="add-to-cart-btn" onclick="addToCart(3, 'Desayuno Tropical Completo', 180.00, 'qty-3')">Agregar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCTO 4 -->
+            <!-- ÍTEM 4: PASEO BALLENAS Y DELFINES -->
             <div class="product-card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Maceta Cerámica Beige">
+                    <img src="https://images.unsplash.com/photo-1568430460464-02e345652e27?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Avistamiento de Ballenas y Delfines">
                 </div>
                 <div class="product-info">
-                    <div class="product-title">Maceta Cerámica Beige</div>
-                    <div class="product-desc">Hecha a mano con textura mate y plato integrado para drenaje.</div>
-                    <div class="product-price">$25.00</div>
+                    <div class="product-title">Avistamiento de Ballenas y Delfines</div>
+                    <div class="product-desc">Paseo matutino en lancha mar adentro para avistar fauna marina en su hábitat.</div>
+                    <div class="product-price">$650.00 MXN / pers</div>
                     <div class="card-actions">
                         <div class="card-qty-wrapper">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-4', -1)">-</button>
                             <input type="number" id="qty-4" class="card-qty-input" value="1" min="1">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-4', 1)">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(4, 'Maceta Cerámica Beige', 25.00, 'qty-4')">Agregar</button>
+                        <button class="add-to-cart-btn" onclick="addToCart(4, 'Paseo Ballenas y Delfines', 650.00, 'qty-4')">Agregar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCTO 5 -->
+            <!-- ÍTEM 5: DESOVE DE TORTUGAS EN VENTANILLA -->
             <div class="product-card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Sansevieria Trifasciata">
+                    <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Desove de Tortugas en Ventanilla">
                 </div>
                 <div class="product-info">
-                    <div class="product-title">Sansevieria Trifasciata</div>
-                    <div class="product-desc">Extremadamente resistente y purificadora del aire. Muy bajo mantenimiento.</div>
-                    <div class="product-price">$29.00</div>
+                    <div class="product-title">Tour Desove de Tortugas (Ventanilla)</div>
+                    <div class="product-desc">Recorrido nocturno guíado por la cooperativa local para presenciar el desove protegido.</div>
+                    <div class="product-price">$400.00 MXN / pers</div>
                     <div class="card-actions">
                         <div class="card-qty-wrapper">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-5', -1)">-</button>
                             <input type="number" id="qty-5" class="card-qty-input" value="1" min="1">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-5', 1)">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(5, 'Sansevieria Trifasciata', 29.00, 'qty-5')">Agregar</button>
+                        <button class="add-to-cart-btn" onclick="addToCart(5, 'Tour Desove Tortugas Ventanilla', 400.00, 'qty-5')">Agregar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- PRODUCTO 6 -->
+            <!-- ÍTEM 6: PLAYA ELEFANTE -->
             <div class="product-card">
                 <div class="img-container">
-                    <img src="https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Pothos Dorado">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Paseo a Playa Elefante">
                 </div>
                 <div class="product-info">
-                    <div class="product-title">Pothos Dorado</div>
-                    <div class="product-desc">Planta colgante de rápido crecimiento y hermosas hojas acorazonadas.</div>
-                    <div class="product-price">$20.00</div>
+                    <div class="product-title">Paseo a Playa Elefante</div>
+                    <div class="product-desc">Excursión a la mística playa de rocas caprichosas con forma de elefante visibles desde la orilla.</div>
+                    <div class="product-price">$500.00 MXN / pers</div>
                     <div class="card-actions">
                         <div class="card-qty-wrapper">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-6', -1)">-</button>
                             <input type="number" id="qty-6" class="card-qty-input" value="1" min="1">
                             <button class="card-qty-btn" onclick="adjustCardQty('qty-6', 1)">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(6, 'Pothos Dorado', 20.00, 'qty-6')">Agregar</button>
+                        <button class="add-to-cart-btn" onclick="addToCart(6, 'Paseo a Playa Elefante', 500.00, 'qty-6')">Agregar</button>
                     </div>
                 </div>
             </div>
+
         </div>
     </main>
 
@@ -871,19 +868,19 @@
     <div class="modal-overlay" id="cartModal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">Tu Pedido</div>
+                <div class="modal-title">Tu Reserva</div>
                 <div class="close-modal" onclick="closeCart()">&times;</div>
             </div>
 
             <div class="delivery-summary-badge" id="modal-date-display">
-                📅 Rango de Entrega: <span id="summary-date-text">No seleccionado</span>
+                📅 Periodo de Viaje: <span id="summary-date-text">No seleccionado</span>
             </div>
 
             <div class="cart-table-wrapper">
                 <table class="cart-table">
                     <thead>
                         <tr>
-                            <th>Producto</th>
+                            <th>Servicio</th>
                             <th>Precio</th>
                             <th>Cant.</th>
                             <th>Subtotal</th>
@@ -895,14 +892,14 @@
             </div>
 
             <div class="cart-summary">
-                Total: $<span id="cart-total">0.00</span> USD
+                Total Estimado: $<span id="cart-total">0.00</span> MXN
             </div>
 
             <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
-                <h3>Datos de Contacto para WhatsApp</h3>
+                <h3>Datos de Contacto para Confirmación por WhatsApp</h3>
                 <div class="form-group">
                     <label>Nombre Completo *</label>
-                    <input type="text" id="cust-name" required placeholder="Ej. Ana García">
+                    <input type="text" id="cust-name" required placeholder="Ej. María López">
                 </div>
                 <div class="form-group">
                     <label>Correo Electrónico *</label>
@@ -913,8 +910,8 @@
                     <input type="tel" id="cust-phone" required placeholder="+52 958 ...">
                 </div>
                 <div class="form-group">
-                    <label>Dirección de Envío / Notas Adicionales</label>
-                    <textarea id="cust-notes" rows="2" placeholder="Dirección completa y referencias..."></textarea>
+                    <label>Notas Adicionales / Requerimientos Especiales</label>
+                    <textarea id="cust-notes" rows="2" placeholder="Ej. Horario preferido para los tours, alergias, etc."></textarea>
                 </div>
 
                 <div class="form-group-checkbox">
@@ -925,14 +922,14 @@
                 </div>
 
                 <button type="submit" class="submit-order-btn">
-                    📲 Enviar Pedido por WhatsApp
+                    📲 Solicitar Reserva por WhatsApp
                 </button>
             </form>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Verde & Armonía — Tienda Botánica. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Posada & Experiencias Costeras. Todos los derechos reservados.</p>
     </footer>
 
     <!-- LÓGICA DE JAVASCRIPT -->
@@ -1004,7 +1001,7 @@
             const endDate = document.getElementById('end-date').value;
 
             if (!startDate || !endDate) {
-                alert("📅 Por favor, selecciona la fecha de inicio y término para la entrega en el Paso 1 antes de agregar productos.");
+                alert("📅 Por favor, selecciona la fecha de llegada y salida en el Paso 1 antes de agregar servicios.");
                 const focusInput = !startDate ? document.getElementById('start-date') : document.getElementById('end-date');
                 focusInput.focus();
                 document.querySelector('.date-selector-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1012,7 +1009,7 @@
             }
 
             if (endDate < startDate) {
-                alert("⚠️ La fecha de término no puede ser anterior a la fecha de inicio.");
+                alert("⚠️ La fecha de salida no puede ser anterior a la de llegada.");
                 return;
             }
 
@@ -1051,14 +1048,12 @@
             updateCartUI();
         }
 
-        /* ACTUALIZA TODO EL ESTADO (NAVBAR, TABLA DE CARRITO Y BARRA FLOTANTE) */
         function updateCartUI() {
             const body = document.getElementById('cart-items-body');
             const countSpan = document.getElementById('cart-count');
             const totalSpan = document.getElementById('cart-total');
             const dateText = document.getElementById('summary-date-text');
 
-            // Elementos de la barra flotante
             const floatingBar = document.getElementById('budget-bar');
             const floatingTotalVal = document.getElementById('floating-total-val');
             const floatingCountVal = document.getElementById('floating-count-val');
@@ -1075,8 +1070,8 @@
             let totalCount = 0;
 
             if (cart.length === 0) {
-                body.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888; padding:20px;">El carrito está vacío</td></tr>';
-                floatingBar.classList.remove('active'); // Ocultar si el carrito se vacía
+                body.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888; padding:20px;">No has seleccionado servicios aún</td></tr>';
+                floatingBar.classList.remove('active');
             } else {
                 cart.forEach(item => {
                     const subtotal = item.price * item.quantity;
@@ -1093,14 +1088,12 @@
                     `;
                     body.appendChild(tr);
                 });
-                floatingBar.classList.add('active'); // Mostrar barra flotante si hay elementos
+                floatingBar.classList.add('active');
             }
 
-            // Actualizar contadores
             countSpan.innerText = totalCount;
             totalSpan.innerText = total.toFixed(2);
 
-            // Actualizar barra flotante
             floatingTotalVal.innerText = total.toFixed(2);
             floatingCountVal.innerText = totalCount;
         }
@@ -1117,7 +1110,7 @@
             e.preventDefault();
 
             if (cart.length === 0) {
-                alert('El carrito está vacío. Por favor agrega productos antes de continuar.');
+                alert('Aún no has agregado ningún servicio a tu reserva.');
                 return;
             }
 
@@ -1129,21 +1122,21 @@
             const notes = document.getElementById('cust-notes').value;
 
             let granTotal = 0;
-            let waMessage = `*¡NUEVA ORDEN DE COMPRA!* 🛒\n\n`;
-            waMessage += `📅 *Rango de Entrega:* Del ${startDate} al ${endDate}\n`;
-            waMessage += `👤 *Cliente:* ${name}\n`;
+            let waMessage = `*¡SOLICITUD DE RESERVA!* 🌊\n\n`;
+            waMessage += `📅 *Fechas del Viaje:* Del ${startDate} al ${endDate}\n`;
+            waMessage += `👤 *Huésped/Cliente:* ${name}\n`;
             waMessage += `📞 *Teléfono:* ${phone}\n`;
             waMessage += `✉️ *Correo:* ${email}\n`;
-            if (notes) waMessage += `📝 *Notas/Dirección:* ${notes}\n`;
-            waMessage += `\n*Detalle del Pedido:*\n`;
+            if (notes) waMessage += `📝 *Notas/Requerimientos:* ${notes}\n`;
+            waMessage += `\n*Detalle de Servicios Solicitados:*\n`;
 
             cart.forEach(item => {
                 const sub = item.price * item.quantity;
                 granTotal += sub;
-                waMessage += `• ${item.name} (x${item.quantity}) - $${sub.toFixed(2)} USD\n`;
+                waMessage += `• ${item.name} (x${item.quantity}) - $${sub.toFixed(2)} MXN\n`;
             });
 
-            waMessage += `\n*TOTAL A PAGAR: $${granTotal.toFixed(2)} USD*`;
+            waMessage += `\n*PRESUPUESTO TOTAL ESTIMADO: $${granTotal.toFixed(2)} MXN*`;
 
             const waUrl = `https://api.whatsapp.com/send?phone=${CONFIG.WHATSAPP_NUMBER}&text=${encodeURIComponent(waMessage)}`;
 

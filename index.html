@@ -491,8 +491,8 @@
             background-color: var(--accent-hover);
         }
 
-        /* SECCIÓN RECORRIDOS A PIE */
-        .walking-tours-section {
+        /* SECCIÓN RECORRIDOS A PIE Y EXPERIENCIAS */
+        .section-divider {
             margin-top: 50px;
             padding-top: 30px;
             border-top: 2px dashed var(--border-color);
@@ -829,6 +829,7 @@
             <div class="nav-links">
                 <a href="#catalogo">Catálogo</a>
                 <a href="#recorridos">Recorridos a Pie</a>
+                <a href="#experiencias">Experiencias</a>
                 <a href="javascript:void(0)" class="cart-trigger" id="cart-button" onclick="openCart()">🛒 Reserva (<span id="cart-count">0</span>)</a>
             </div>
         </div>
@@ -1055,7 +1056,7 @@
         </div>
 
         <!-- SECCIÓN: RECORRIDOS A PIE -->
-        <section class="walking-tours-section" id="recorridos">
+        <section class="section-divider" id="recorridos">
             <h2 class="section-title">🥾 Recorridos a Pie</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">
                 Explora los puntos más emblemáticos de Mazunte caminando directamente desde <b>Casa Ava Mazunte</b>.
@@ -1135,7 +1136,7 @@
                             <div class="walking-card-title">Restaurante Mar Alto</div>
                         </div>
                         <div class="walking-card-desc">
-                            Paseo gastronómico directo al restaurante para disfrutar de mariscos frescos y cocina local con vista privilegiada.
+                            Paseo gastronómico directo al restaurante para disfrutar de mariscos frescos y cocina local con vista privilegeda.
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/dir/?api=1&origin=Casa+Ava+Mazunte&destination=Restaurante+Mar+Alto+Mazunte&travelmode=walking" target="_blank" rel="noopener noreferrer" class="map-btn">
@@ -1157,6 +1158,90 @@
                     <a href="https://www.google.com/maps/dir/?api=1&origin=Casa+Ava+Mazunte&destination=Icaro+Cafe+Mazunte&travelmode=walking" target="_blank" rel="noopener noreferrer" class="map-btn">
                         Ver ruta a pie 🗺️
                     </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN: EXPERIENCIAS CREATIVAS Y DE DESCANSO -->
+        <section class="section-divider" id="experiencias">
+            <h2 class="section-title">✨ Experiencias en la Playa</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">
+                Actividades creativas y de relajación a la orilla del mar. Duración: <b>2.5 horas</b> | Incluyen todo el material necesario.
+            </p>
+
+            <div class="product-grid">
+                
+                <!-- EXPERIENCIA 1: PICNIC -->
+                <div class="product-card">
+                    <div class="img-container" onclick="openGallery('Picnic en la Playa', [
+                        'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
+                    ])">
+                        <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Picnic en la playa">
+                        <span class="gallery-badge">📷 Ver fotos</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Picnic en la Playa</div>
+                        <div class="product-desc">Montaje boho a la orilla del mar con cojines, bocadillos locales, fruta fresca y bebidas para disfrutar el atardecer (2.5 hrs).</div>
+                        <div class="product-price">$450.00 MXN / pers</div>
+                        <div class="card-actions">
+                            <div class="card-qty-wrapper">
+                                <button class="card-qty-btn" onclick="adjustCardQty('qty-exp1', -1)">-</button>
+                                <input type="number" id="qty-exp1" class="card-qty-input" value="1" min="1">
+                                <button class="card-qty-btn" onclick="adjustCardQty('qty-exp1', 1)">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart('exp1', 'Picnic en la Playa (2.5 hrs)', 450.00, 'qty-exp1')">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPERIENCIA 2: CIANOTIPIA -->
+                <div class="product-card">
+                    <div class="img-container" onclick="openGallery('Cianotipia: Diseña tu playera', [
+                        'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80'
+                    ])">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Cianotipia en la playa">
+                        <span class="gallery-badge">📷 Ver fotos</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Cianotipia: "Diseña tu Playera"</div>
+                        <div class="product-desc">Taller solar de impresión fotográfica artesanal. Utiliza la luz del sol de la playa y elementos naturales para crear tu diseño exclusivo (2.5 hrs).</div>
+                        <div class="product-price">$450.00 MXN / pers</div>
+                        <div class="card-actions">
+                            <div class="card-qty-wrapper">
+                                <button class="card-qty-btn" onclick="adjustCardQty('qty-exp2', -1)">-</button>
+                                <input type="number" id="qty-exp2" class="card-qty-input" value="1" min="1">
+                                <button class="card-qty-btn" onclick="adjustCardQty('qty-exp2', 1)">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart('exp2', 'Cianotipia: Diseña tu playera (2.5 hrs)', 450.00, 'qty-exp2')">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPERIENCIA 3: COLLAGE -->
+                <div class="product-card">
+                    <div class="img-container" onclick="openGallery('Collage en la Playa', [
+                        'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80',
+                        'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80'
+                    ])">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Collage mini cuadro">
+                        <span class="gallery-badge">📷 Ver fotos</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Collage: Crea un Mini Cuadro</div>
+                        <div class="product-desc">Sesión de expresión artística reuniendo texturas, conchas y recortes junto al mar para enmarcar un recuerdo único de tu viaje (2.5 hrs).</div>
+                        <div class="product-price">$450.00 MXN / pers</div>
+                        <div class="card-actions">
+                            <div class="card-qty-wrapper">
+                                <button class="card-qty-btn" onclick="adjustCardQty('qty-exp3', -1)">-</button>
+                                <input type="number" id="qty-exp3" class="card-qty-input" value="1" min="1">
+                                <button class="card-qty-btn" onclick="adjustCardQty('qty-exp3', 1)">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart('exp3', 'Collage: Crea un mini cuadro (2.5 hrs)', 450.00, 'qty-exp3')">Agregar</button>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -1223,7 +1308,7 @@
                 </div>
                 <div class="form-group">
                     <label>Notas Adicionales / Requerimientos Especiales</label>
-                    <textarea id="cust-notes" rows="2" placeholder="Ej. Horario preferido para los tours, alergias, etc."></textarea>
+                    <textarea id="cust-notes" rows="2" placeholder="Ej. Horario preferido para los tours o experiencias, alergias, etc."></textarea>
                 </div>
 
                 <div class="form-group-checkbox">

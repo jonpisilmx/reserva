@@ -10,7 +10,7 @@
             --bg-card: #FFFFFF;
             --text-main: #2C3531;
             --text-muted: #6B7C75;
-            --accent-green: #2D5A27; /* Verde selva/palapa */
+            --accent-green: #2D5A27;
             --accent-hover: #1E3D1A;
             --accent-light: #E8EFE6;
             --border-color: #D8E2D5;
@@ -210,7 +210,7 @@
             letter-spacing: 1px;
         }
 
-        /* SECCIÓN DE RANGO DE FECHAS (PASO 1) */
+        /* SECCIÓN DE RANGO DE FECHAS */
         .date-selector-card {
             background: #FFFFFF;
             border: 2px solid var(--accent-green);
@@ -320,7 +320,7 @@
             position: absolute;
             bottom: 10px;
             right: 10px;
-            background: rgba(44, 62, 53, 0.85);
+            background: rgba(45, 90, 39, 0.88);
             color: white;
             font-size: 11px;
             padding: 4px 10px;
@@ -697,7 +697,7 @@
         <button class="floating-btn" onclick="openCart()">Ver Reserva 🛒</button>
     </div>
 
-    <!-- HERO SECTION (HOTEL ESTILO MAZUNTE) -->
+    <!-- HERO SECTION -->
     <section class="hero">
         <h1>Tu Refugio en la Costa</h1>
         <p>Hospedaje eco-rústico y las mejores experiencias de aventura en la costa oaxaqueña.</p>
@@ -726,13 +726,18 @@
 
         <h2 class="section-title">Paso 2: Personaliza tu Experiencia</h2>
 
-        <!-- PRODUCT GRID CON LAS NUEVAS IMÁGENES -->
+        <!-- PRODUCT GRID CON GALERÍAS EN CADA ÍTEM -->
         <div class="product-grid">
             
             <!-- ÍTEM 1: HABITACIÓN DE HOTEL -->
             <div class="product-card">
-                <div class="img-container">
+                <div class="img-container" onclick="openGallery('Habitación Posada Rústica', [
+                    'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80'
+                ])">
                     <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Habitación de Hotel Rústica">
+                    <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
                     <div class="product-title">Habitación Posada Rústica</div>
@@ -751,8 +756,13 @@
 
             <!-- ÍTEM 2: RENTA DE AUTOS -->
             <div class="product-card">
-                <div class="img-container">
+                <div class="img-container" onclick="openGallery('Renta de Auto Tout-Terrain', [
+                    'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80'
+                ])">
                     <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Renta de Autos">
+                    <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
                     <div class="product-title">Renta de Auto Tout-Terrain</div>
@@ -771,8 +781,13 @@
 
             <!-- ÍTEM 3: DESAYUNOS INCLUIDOS -->
             <div class="product-card">
-                <div class="img-container">
+                <div class="img-container" onclick="openGallery('Desayuno Tropical Completo', [
+                    'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1496042399014-dc73c4f2bde1?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80'
+                ])">
                     <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Desayunos Incluidos">
+                    <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
                     <div class="product-title">Desayuno Tropical Completo</div>
@@ -789,10 +804,15 @@
                 </div>
             </div>
 
-            <!-- ÍTEM 4: PASEO BALLENAS Y DELFINES -->
+            <!-- ÍTEM 4: PASEO BALLENAS Y DELFINES (CORREGIDO CON GALERÍA) -->
             <div class="product-card">
-                <div class="img-container">
+                <div class="img-container" onclick="openGallery('Avistamiento de Ballenas y Delfines', [
+                    'https://images.unsplash.com/photo-1568430460464-02e345652e27?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80'
+                ])">
                     <img src="https://images.unsplash.com/photo-1568430460464-02e345652e27?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Avistamiento de Ballenas y Delfines">
+                    <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
                     <div class="product-title">Avistamiento de Ballenas y Delfines</div>
@@ -811,12 +831,16 @@
 
             <!-- ÍTEM 5: DESOVE DE TORTUGAS EN VENTANILLA -->
             <div class="product-card">
-                <div class="img-container">
+                <div class="img-container" onclick="openGallery('Tour Desove de Tortugas (Ventanilla)', [
+                    'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
+                ])">
                     <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Desove de Tortugas en Ventanilla">
+                    <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
                     <div class="product-title">Tour Desove de Tortugas (Ventanilla)</div>
-                    <div class="product-desc">Recorrido nocturno guíado por la cooperativa local para presenciar el desove protegido.</div>
+                    <div class="product-desc">Recorrido nocturno guiado por la cooperativa local para presenciar el desove protegido.</div>
                     <div class="product-price">$400.00 MXN / pers</div>
                     <div class="card-actions">
                         <div class="card-qty-wrapper">
@@ -831,8 +855,12 @@
 
             <!-- ÍTEM 6: PLAYA ELEFANTE -->
             <div class="product-card">
-                <div class="img-container">
+                <div class="img-container" onclick="openGallery('Paseo a Playa Elefante', [
+                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80'
+                ])">
                     <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Paseo a Playa Elefante">
+                    <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
                     <div class="product-title">Paseo a Playa Elefante</div>

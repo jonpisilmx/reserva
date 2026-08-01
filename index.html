@@ -770,7 +770,7 @@
     <!-- MAIN CATALOG CONTAINER -->
     <main class="container" id="catalogo">
         
-        <!-- PASO 1: SELECCIÓN DE FECHAS -->
+        <!-- PASO 1: SELECCIÓN DE FECHAS (PRECARGADAS DEL 13 AL 16 DE NOV) -->
         <div class="date-selector-card">
             <h3>📅 Paso 1: Selecciona las fechas de tu estancia / viaje</h3>
             <p>Elige tu fecha de llegada y salida para consultar disponibilidad de habitaciones y tours.</p>
@@ -778,11 +778,11 @@
             <div class="date-range-wrapper">
                 <div class="date-field">
                     <label for="start-date">Llegada (Fecha inicio) *</label>
-                    <input type="date" id="start-date" onchange="handleStartDateChange()">
+                    <input type="date" id="start-date" value="2026-11-13" onchange="handleStartDateChange()">
                 </div>
                 <div class="date-field">
                     <label for="end-date">Salida (Fecha término) *</label>
-                    <input type="date" id="end-date">
+                    <input type="date" id="end-date" value="2026-11-16">
                 </div>
             </div>
         </div>
@@ -817,13 +817,14 @@
                 </div>
             </div>
 
-            <!-- ÍTEM 2: TRANSPORTACIÓN EN VAN CON CASILLAS Y SELECTOR DE DÍAS -->
+            <!-- ÍTEM 2: TRANSPORTACIÓN EN VAN (IMÁGENES ACTUALIZADAS) -->
             <div class="product-card">
                 <div class="img-container" onclick="openGallery('Transportación Privada en Van', [
-                    'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'
+                    'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?auto=format&fit=crop&w=800&q=80'
                 ])">
-                    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Transportación en Van">
+                    <img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Transportación en Van Privada">
                     <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
@@ -897,14 +898,14 @@
                 </div>
             </div>
 
-            <!-- ÍTEM 4: PASEO BALLENAS Y DELFINES -->
+            <!-- ÍTEM 4: PASEO BALLENAS Y DELFINES (IMÁGENES CORREGIDAS) -->
             <div class="product-card">
                 <div class="img-container" onclick="openGallery('Avistamiento de Ballenas y Delfines', [
-                    'https://images.unsplash.com/photo-1568430460464-02e345652e27?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80'
+                    'https://images.unsplash.com/photo-1560275619-4662e36fa65c?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1570459027562-4a916cc6113f?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80'
                 ])">
-                    <img src="https://images.unsplash.com/photo-1568430460464-02e345652e27?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Avistamiento de Ballenas y Delfines">
+                    <img src="https://images.unsplash.com/photo-1560275619-4662e36fa65c?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Avistamiento de Ballenas y Delfines">
                     <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
@@ -1066,8 +1067,12 @@
             const endDate = document.getElementById('end-date');
             const today = new Date().toISOString().split('T')[0];
 
+            // Establecer fecha mínima para que no puedan seleccionar fechas pasadas
             startDate.setAttribute('min', today);
             endDate.setAttribute('min', today);
+            
+            // Forzar actualización inicial de texto en el modal con las fechas precargadas
+            updateCartUI();
         });
 
         function handleStartDateChange() {
@@ -1080,6 +1085,7 @@
                     endDateInput.value = startDateVal;
                 }
             }
+            updateCartUI();
         }
 
         /* AUTO-MARCAR LA CASILLA SI SE CAMBIA EL DESPLEGABLE DE DÍAS */
@@ -1149,12 +1155,10 @@
                     cart.push({ id: customId, name: serviceName, price: price, quantity: 1 });
                 }
                 
-                chk.checked = false; // desmarcar tras agregar
+                chk.checked = false;
             });
 
-            // Resetear el desplegable a 1 día por defecto tras la adición
             document.getElementById('van-days-select').value = "1";
-
             calcVanSubtotal();
             updateCartUI();
 

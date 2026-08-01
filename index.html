@@ -359,7 +359,7 @@
             margin-bottom: 12px;
         }
 
-        /* ESTILOS DE CASILLAS DE TRANSPORTACIÓN (ÍTEM 2) */
+        /* ESTILOS DE CASILLAS Y SELECTOR DE TRANSPORTACIÓN (ÍTEM 2) */
         .van-options-container {
             text-align: left;
             background-color: var(--bg-primary);
@@ -369,7 +369,7 @@
             margin-bottom: 12px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .van-option-item {
@@ -395,6 +395,31 @@
             font-weight: 700;
             color: var(--accent-green);
             white-space: nowrap;
+        }
+
+        .van-select-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+            padding-left: 24px;
+        }
+
+        .van-select-wrapper label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .van-days-select {
+            padding: 3px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 12px;
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
         }
 
         /* SELECTOR DE CANTIDAD EN LA TARJETA */
@@ -792,7 +817,7 @@
                 </div>
             </div>
 
-            <!-- ÍTEM 2: TRANSPORTACIÓN EN VAN CON CASILLAS DE SELECCIÓN -->
+            <!-- ÍTEM 2: TRANSPORTACIÓN EN VAN CON CASILLAS Y SELECTOR DE DÍAS -->
             <div class="product-card">
                 <div class="img-container" onclick="openGallery('Transportación Privada en Van', [
                     'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80',
@@ -803,7 +828,7 @@
                 </div>
                 <div class="product-info">
                     <div class="product-title">Transportación en Van</div>
-                    <div class="product-desc">Selecciona las rutas o trayectos que requieres durante tu estancia:</div>
+                    <div class="product-desc">Selecciona los traslados o paquetes de viaje que requieres:</div>
                     
                     <!-- CASILLAS DE OPCIONES DE TRAYECTO -->
                     <div class="van-options-container">
@@ -823,10 +848,22 @@
                             <input type="checkbox" class="van-chk" value="Viaje hacia aeropuerto 1 pax 16 nov" data-price="2000" onchange="calcVanSubtotal()">
                             <span>Viaje hacia aeropuerto 1 pax 16 nov <b class="van-option-price">($2,000 MXN)</b></span>
                         </label>
-                        <label class="van-option-item">
-                            <input type="checkbox" class="van-chk" value="1 día de hasta 3 viajes redondos diarios (radio 10 Km, hasta 5 pax)" data-price="2000" onchange="calcVanSubtotal()">
-                            <span>1 día de hasta 3 viajes redondos diarios en radio de 10 Km, hasta 5 pax <b class="van-option-price">($2,000 MXN)</b></span>
-                        </label>
+                        
+                        <!-- OPCIÓN CON MENÚ DESPLEGABLE DE DÍAS -->
+                        <div>
+                            <label class="van-option-item">
+                                <input type="checkbox" class="van-chk" id="van-days-chk" value="Días de viajes redondos diarios (hasta 3/día, radio 10 Km, hasta 5 pax)" data-price="2000" onchange="calcVanSubtotal()">
+                                <span>Viajes redondos diarios en radio de 10 Km (hasta 5 pax) <b class="van-option-price">($2,000 MXN/día)</b></span>
+                            </label>
+                            <div class="van-select-wrapper">
+                                <label for="van-days-select">Número de días:</label>
+                                <select id="van-days-select" class="van-days-select" onchange="handleDaysSelectChange()">
+                                    <option value="1">1 Día ($2,000 MXN)</option>
+                                    <option value="2">2 Días ($4,000 MXN)</option>
+                                    <option value="3">3 Días ($6,000 MXN)</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="product-price">Subtotal: $<span id="van-subtotal-display">0.00</span> MXN</div>
@@ -1045,13 +1082,27 @@
             }
         }
 
+        /* AUTO-MARCAR LA CASILLA SI SE CAMBIA EL DESPLEGABLE DE DÍAS */
+        function handleDaysSelectChange() {
+            const daysChk = document.getElementById('van-days-chk');
+            daysChk.checked = true;
+            calcVanSubtotal();
+        }
+
         /* CALCULAR SUBTOTAL EN TIEMPO REAL DE LAS CASILLAS DE VAN */
         function calcVanSubtotal() {
             const checkboxes = document.querySelectorAll('.van-chk:checked');
             let total = 0;
+            
             checkboxes.forEach(chk => {
-                total += parseFloat(chk.getAttribute('data-price'));
+                if (chk.id === 'van-days-chk') {
+                    const daysCount = parseInt(document.getElementById('van-days-select').value) || 1;
+                    total += parseFloat(chk.getAttribute('data-price')) * daysCount;
+                } else {
+                    total += parseFloat(chk.getAttribute('data-price'));
+                }
             });
+
             document.getElementById('van-subtotal-display').innerText = total.toFixed(2);
         }
 
@@ -1075,9 +1126,21 @@
             }
 
             checkedBoxes.forEach(chk => {
-                const serviceName = `Van: ${chk.value}`;
-                const price = parseFloat(chk.getAttribute('data-price'));
-                const customId = `van-${chk.value.replace(/\s+/g, '-').toLowerCase()}`;
+                let serviceName = "";
+                let price = 0;
+                let customId = "";
+
+                if (chk.id === 'van-days-chk') {
+                    const daysCount = parseInt(document.getElementById('van-days-select').value) || 1;
+                    const daysLabel = daysCount === 1 ? "1 Día" : `${daysCount} Días`;
+                    serviceName = `Van: ${daysLabel} de viajes redondos diarios (hasta 3/día, radio 10 Km, hasta 5 pax)`;
+                    price = parseFloat(chk.getAttribute('data-price')) * daysCount;
+                    customId = `van-days-${daysCount}`;
+                } else {
+                    serviceName = `Van: ${chk.value}`;
+                    price = parseFloat(chk.getAttribute('data-price'));
+                    customId = `van-${chk.value.replace(/\s+/g, '-').toLowerCase()}`;
+                }
 
                 const existingItem = cart.find(item => item.id === customId);
                 if (existingItem) {
@@ -1085,8 +1148,12 @@
                 } else {
                     cart.push({ id: customId, name: serviceName, price: price, quantity: 1 });
                 }
+                
                 chk.checked = false; // desmarcar tras agregar
             });
+
+            // Resetear el desplegable a 1 día por defecto tras la adición
+            document.getElementById('van-days-select').value = "1";
 
             calcVanSubtotal();
             updateCartUI();

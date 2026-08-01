@@ -359,6 +359,44 @@
             margin-bottom: 12px;
         }
 
+        /* ESTILOS DE CASILLAS DE TRANSPORTACIÓN (ÍTEM 2) */
+        .van-options-container {
+            text-align: left;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .van-option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-main);
+            line-height: 1.3;
+            cursor: pointer;
+        }
+
+        .van-option-item input[type="checkbox"] {
+            margin-top: 2px;
+            accent-color: var(--accent-green);
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .van-option-price {
+            font-weight: 700;
+            color: var(--accent-green);
+            white-space: nowrap;
+        }
+
         /* SELECTOR DE CANTIDAD EN LA TARJETA */
         .card-actions {
             display: flex;
@@ -726,7 +764,7 @@
 
         <h2 class="section-title">Paso 2: Personaliza tu Experiencia</h2>
 
-        <!-- PRODUCT GRID CON GALERÍAS EN CADA ÍTEM -->
+        <!-- PRODUCT GRID -->
         <div class="product-grid">
             
             <!-- ÍTEM 1: HABITACIÓN DE HOTEL -->
@@ -754,28 +792,46 @@
                 </div>
             </div>
 
-            <!-- ÍTEM 2: RENTA DE AUTOS -->
+            <!-- ÍTEM 2: TRANSPORTACIÓN EN VAN CON CASILLAS DE SELECCIÓN -->
             <div class="product-card">
-                <div class="img-container" onclick="openGallery('Renta de Auto Tout-Terrain', [
+                <div class="img-container" onclick="openGallery('Transportación Privada en Van', [
                     'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80'
+                    'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'
                 ])">
-                    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Renta de Autos">
+                    <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Transportación en Van">
                     <span class="gallery-badge">📷 Ver fotos</span>
                 </div>
                 <div class="product-info">
-                    <div class="product-title">Renta de Auto Tout-Terrain</div>
-                    <div class="product-desc">Vehículo adaptado para recorrer con libertad las playas y caminos de la costa.</div>
-                    <div class="product-price">$850.00 MXN / día</div>
-                    <div class="card-actions">
-                        <div class="card-qty-wrapper">
-                            <button class="card-qty-btn" onclick="adjustCardQty('qty-2', -1)">-</button>
-                            <input type="number" id="qty-2" class="card-qty-input" value="1" min="1">
-                            <button class="card-qty-btn" onclick="adjustCardQty('qty-2', 1)">+</button>
-                        </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(2, 'Renta de Auto Tout-Terrain', 850.00, 'qty-2')">Agregar</button>
+                    <div class="product-title">Transportación en Van</div>
+                    <div class="product-desc">Selecciona las rutas o trayectos que requieres durante tu estancia:</div>
+                    
+                    <!-- CASILLAS DE OPCIONES DE TRAYECTO -->
+                    <div class="van-options-container">
+                        <label class="van-option-item">
+                            <input type="checkbox" class="van-chk" value="Recogida en aeropuerto 1 pax 13 nov" data-price="2000" onchange="calcVanSubtotal()">
+                            <span>Recogida en aeropuerto 1 pax 13 nov <b class="van-option-price">($2,000 MXN)</b></span>
+                        </label>
+                        <label class="van-option-item">
+                            <input type="checkbox" class="van-chk" value="Recogida en aeropuerto 4 pax 14 nov" data-price="2000" onchange="calcVanSubtotal()">
+                            <span>Recogida en aeropuerto 4 pax 14 nov <b class="van-option-price">($2,000 MXN)</b></span>
+                        </label>
+                        <label class="van-option-item">
+                            <input type="checkbox" class="van-chk" value="Viaje hacia aeropuerto 4 pax 15 nov" data-price="2000" onchange="calcVanSubtotal()">
+                            <span>Viaje hacia aeropuerto 4 pax 15 nov <b class="van-option-price">($2,000 MXN)</b></span>
+                        </label>
+                        <label class="van-option-item">
+                            <input type="checkbox" class="van-chk" value="Viaje hacia aeropuerto 1 pax 16 nov" data-price="2000" onchange="calcVanSubtotal()">
+                            <span>Viaje hacia aeropuerto 1 pax 16 nov <b class="van-option-price">($2,000 MXN)</b></span>
+                        </label>
+                        <label class="van-option-item">
+                            <input type="checkbox" class="van-chk" value="1 día de hasta 3 viajes redondos diarios (radio 10 Km, hasta 5 pax)" data-price="2000" onchange="calcVanSubtotal()">
+                            <span>1 día de hasta 3 viajes redondos diarios en radio de 10 Km, hasta 5 pax <b class="van-option-price">($2,000 MXN)</b></span>
+                        </label>
                     </div>
+
+                    <div class="product-price">Subtotal: $<span id="van-subtotal-display">0.00</span> MXN</div>
+
+                    <button class="add-to-cart-btn" style="width: 100%;" onclick="addVanServicesToCart()">Agregar Rutas Seleccionadas</button>
                 </div>
             </div>
 
@@ -804,7 +860,7 @@
                 </div>
             </div>
 
-            <!-- ÍTEM 4: PASEO BALLENAS Y DELFINES (CORREGIDO CON GALERÍA) -->
+            <!-- ÍTEM 4: PASEO BALLENAS Y DELFINES -->
             <div class="product-card">
                 <div class="img-container" onclick="openGallery('Avistamiento de Ballenas y Delfines', [
                     'https://images.unsplash.com/photo-1568430460464-02e345652e27?auto=format&fit=crop&w=800&q=80',
@@ -989,6 +1045,59 @@
             }
         }
 
+        /* CALCULAR SUBTOTAL EN TIEMPO REAL DE LAS CASILLAS DE VAN */
+        function calcVanSubtotal() {
+            const checkboxes = document.querySelectorAll('.van-chk:checked');
+            let total = 0;
+            checkboxes.forEach(chk => {
+                total += parseFloat(chk.getAttribute('data-price'));
+            });
+            document.getElementById('van-subtotal-display').innerText = total.toFixed(2);
+        }
+
+        /* AGREGAR LOS SERVICIOS DE VAN SELECCIONADOS AL CARRITO */
+        function addVanServicesToCart() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            if (!startDate || !endDate) {
+                alert("📅 Por favor, selecciona la fecha de llegada y salida en el Paso 1 antes de agregar servicios.");
+                const focusInput = !startDate ? document.getElementById('start-date') : document.getElementById('end-date');
+                focusInput.focus();
+                document.querySelector('.date-selector-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            const checkedBoxes = document.querySelectorAll('.van-chk:checked');
+            if (checkedBoxes.length === 0) {
+                alert("⚠️ Por favor marca al menos una opción de ruta de Van.");
+                return;
+            }
+
+            checkedBoxes.forEach(chk => {
+                const serviceName = `Van: ${chk.value}`;
+                const price = parseFloat(chk.getAttribute('data-price'));
+                const customId = `van-${chk.value.replace(/\s+/g, '-').toLowerCase()}`;
+
+                const existingItem = cart.find(item => item.id === customId);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ id: customId, name: serviceName, price: price, quantity: 1 });
+                }
+                chk.checked = false; // desmarcar tras agregar
+            });
+
+            calcVanSubtotal();
+            updateCartUI();
+
+            const cartBtn = document.getElementById('cart-button');
+            cartBtn.style.transform = 'scale(1.15)';
+            setTimeout(() => {
+                cartBtn.style.transform = 'scale(1)';
+            }, 200);
+        }
+
         function openGallery(title, images) {
             document.getElementById('gallery-title').innerText = title;
             const mainImg = document.getElementById('gallery-main');
@@ -1110,9 +1219,9 @@
                     tr.innerHTML = `
                         <td><strong>${item.name}</strong></td>
                         <td>$${item.price.toFixed(2)}</td>
-                        <td><input type="number" class="qty-input" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)"></td>
+                        <td><input type="number" class="qty-input" value="${item.quantity}" min="1" onchange="updateQuantity('${item.id}', this.value)"></td>
                         <td>$${subtotal.toFixed(2)}</td>
-                        <td><button class="remove-btn" onclick="removeFromCart(${item.id})">&times;</button></td>
+                        <td><button class="remove-btn" onclick="removeFromCart('${item.id}')">&times;</button></td>
                     `;
                     body.appendChild(tr);
                 });

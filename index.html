@@ -28,6 +28,7 @@
             background-color: var(--bg-primary);
             color: var(--text-main);
             line-height: 1.6;
+            padding-bottom: 80px; /* Margen inferior para que la barra flotante no tape el footer */
         }
 
         /* HEADER & NAV RESPONSIVO */
@@ -87,6 +88,69 @@
         }
 
         .cart-trigger:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* BARRA FLOTANTE DE PRESUPUESTO EN VIVO */
+        .budget-floating-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px); /* Oculto inicialmente */
+            background-color: #FFFFFF;
+            border: 2px solid var(--accent-green);
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1500;
+            width: 90%;
+            max-width: 480px;
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .budget-floating-bar.active {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .floating-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .floating-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .floating-total {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        .floating-btn {
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .floating-btn:hover {
             background-color: var(--accent-hover);
         }
 
@@ -412,7 +476,6 @@
             color: var(--text-muted);
         }
 
-        /* ESTILOS ESPECÍFICOS DEL POPUP DE GALERÍA DE FOTOS */
         .gallery-main-img {
             width: 100%;
             height: 320px;
@@ -624,6 +687,15 @@
             </div>
         </div>
     </header>
+
+    <!-- BARRA FLOTANTE DE PRESUPUESTO EN VIVO -->
+    <div class="budget-floating-bar" id="budget-bar">
+        <div class="floating-info">
+            <span class="floating-label">Presupuesto Actual</span>
+            <span class="floating-total">$<span id="floating-total-val">0.00</span> USD (<span id="floating-count-val">0</span> ítems)</span>
+        </div>
+        <button class="floating-btn" onclick="openCart()">Ver Carrito 🛒</button>
+    </div>
 
     <!-- HERO SECTION -->
     <section class="hero">
@@ -892,7 +964,6 @@
             }
         }
 
-        /* LÓGICA DE GALERÍA DE FOTOS */
         function openGallery(title, images) {
             document.getElementById('gallery-title').innerText = title;
             const mainImg = document.getElementById('gallery-main');
@@ -980,11 +1051,17 @@
             updateCartUI();
         }
 
+        /* ACTUALIZA TODO EL ESTADO (NAVBAR, TABLA DE CARRITO Y BARRA FLOTANTE) */
         function updateCartUI() {
             const body = document.getElementById('cart-items-body');
             const countSpan = document.getElementById('cart-count');
             const totalSpan = document.getElementById('cart-total');
             const dateText = document.getElementById('summary-date-text');
+
+            // Elementos de la barra flotante
+            const floatingBar = document.getElementById('budget-bar');
+            const floatingTotalVal = document.getElementById('floating-total-val');
+            const floatingCountVal = document.getElementById('floating-count-val');
 
             const startDate = document.getElementById('start-date').value;
             const endDate = document.getElementById('end-date').value;
@@ -999,6 +1076,7 @@
 
             if (cart.length === 0) {
                 body.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888; padding:20px;">El carrito está vacío</td></tr>';
+                floatingBar.classList.remove('active'); // Ocultar si el carrito se vacía
             } else {
                 cart.forEach(item => {
                     const subtotal = item.price * item.quantity;
@@ -1015,10 +1093,16 @@
                     `;
                     body.appendChild(tr);
                 });
+                floatingBar.classList.add('active'); // Mostrar barra flotante si hay elementos
             }
 
+            // Actualizar contadores
             countSpan.innerText = totalCount;
             totalSpan.innerText = total.toFixed(2);
+
+            // Actualizar barra flotante
+            floatingTotalVal.innerText = total.toFixed(2);
+            floatingCountVal.innerText = totalCount;
         }
 
         function openCart() {

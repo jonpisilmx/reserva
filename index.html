@@ -14,6 +14,7 @@
             --accent-hover: #1E3D1A;
             --accent-light: #E8EFE6;
             --border-color: #D8E2D5;
+            --pricetravel-dark: #122B21;
             --font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
@@ -567,6 +568,122 @@
             color: #FFFFFF;
         }
 
+        /* SECCIÓN "¡COMUNÍCATE CON NOSOTROS!" (ESTILO PRICETRAVEL) */
+        .contact-pricetravel-section {
+            background: linear-gradient(135deg, var(--pricetravel-dark) 0%, #1E3D1A 100%);
+            border-radius: 16px;
+            padding: 35px 25px;
+            color: #FFFFFF;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-top: 50px;
+        }
+
+        .pt-contact-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pt-contact-header h2 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .pt-contact-header p {
+            font-size: 14px;
+            color: #D0E0D5;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .pt-options-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .pt-option-card {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s, background 0.2s, border-color 0.2s;
+        }
+
+        .pt-option-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .pt-icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .pt-option-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #FFFFFF;
+        }
+
+        .pt-option-subtitle {
+            font-size: 13px;
+            color: #C2D6C8;
+            margin-bottom: 18px;
+            line-height: 1.4;
+        }
+
+        .pt-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background 0.2s, transform 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .pt-btn-wa {
+            background-color: #25D366;
+            color: #FFFFFF;
+        }
+
+        .pt-btn-wa:hover {
+            background-color: #1EBE5D;
+        }
+
+        .pt-btn-call {
+            background-color: #FFFFFF;
+            color: var(--pricetravel-dark);
+        }
+
+        .pt-btn-call:hover {
+            background-color: var(--accent-light);
+        }
+
         /* MODALES */
         .modal-overlay {
             display: none;
@@ -807,6 +924,9 @@
             .walking-tours-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .pt-options-wrapper {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (min-width: 900px) {
@@ -830,6 +950,7 @@
                 <a href="#catalogo">Catálogo</a>
                 <a href="#recorridos">Recorridos a Pie</a>
                 <a href="#experiencias">Experiencias</a>
+                <a href="#contacto">Contacto</a>
                 <a href="javascript:void(0)" class="cart-trigger" id="cart-button" onclick="openCart()">🛒 Reserva (<span id="cart-count">0</span>)</a>
             </div>
         </div>
@@ -1163,7 +1284,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN: EXPERIENCIAS CREATIVAS Y DE DESCANSO (IMÁGENES ACTUALIZADAS) -->
+        <!-- SECCIÓN: EXPERIENCIAS CREATIVAS Y DE DESCANSO -->
         <section class="section-divider" id="experiencias">
             <h2 class="section-title">✨ Experiencias en la Playa</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">
@@ -1242,6 +1363,42 @@
                             <button class="add-to-cart-btn" onclick="addToCart('exp3', 'Collage: Crea un mini cuadro (2.5 hrs)', 450.00, 'qty-exp3')">Agregar</button>
                         </div>
                     </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN ESTILO PRICETRAVEL: ¡COMUNÍCATE CON NOSOTROS! -->
+        <section class="contact-pricetravel-section" id="contacto">
+            <div class="pt-contact-header">
+                <h2>¡Comunícate con nosotros!</h2>
+                <p>¿Tienes alguna duda sobre tu viaje o prefieres atención personalizada? Elige tu medio favorito de contacto.</p>
+            </div>
+
+            <div class="pt-options-wrapper">
+                
+                <!-- OPCIÓN 1: WHATSAPP -->
+                <div class="pt-option-card">
+                    <div class="pt-icon-circle">💬</div>
+                    <div class="pt-option-title">Escríbenos por WhatsApp</div>
+                    <div class="pt-option-subtitle">
+                        Respuesta rápida e inmediata. Consulta disponibilidad de hospedaje, tours y traslados.
+                    </div>
+                    <button class="pt-action-btn pt-btn-wa" onclick="contactViaWhatsApp()">
+                        💬 Chatear por WhatsApp
+                    </button>
+                </div>
+
+                <!-- OPCIÓN 2: LLÁMAME -->
+                <div class="pt-option-card">
+                    <div class="pt-icon-circle">📞</div>
+                    <div class="pt-option-title">Llámame</div>
+                    <div class="pt-option-subtitle">
+                        Atención directa por llamada telefónica para resolver dudas o personalizar tu paquete.
+                    </div>
+                    <button class="pt-action-btn pt-btn-call" onclick="contactViaCall()">
+                        📞 Llamar al +52 958 109 8287
+                    </button>
                 </div>
 
             </div>
@@ -1347,6 +1504,17 @@
             
             updateCartUI();
         });
+
+        /* FUNCIONES DE CONTACTO DIRECTO (ESTILO PRICETRAVEL) */
+        function contactViaWhatsApp() {
+            const defaultMsg = "¡Hola! Me gustaría obtener más información sobre las experiencias y hospedaje en Posada & Experiencias.";
+            const waUrl = `https://api.whatsapp.com/send?phone=${CONFIG.WHATSAPP_NUMBER}&text=${encodeURIComponent(defaultMsg)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        function contactViaCall() {
+            window.location.href = `tel:+${CONFIG.WHATSAPP_NUMBER}`;
+        }
 
         function handleStartDateChange() {
             const startDateVal = document.getElementById('start-date').value;
